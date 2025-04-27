@@ -17,7 +17,7 @@ export default function ContactHeader() {
           <h1 className="font-bold mb-1">
             Kontak Program Studi Teknik Sipil Unsoed
           </h1>
-          <p className="text-light-base">
+          <p>
             Kami siap menjawab pertanyaan Anda. Silakan hubungi kami melalui
             informasi kontak di bawah ini atau isi formulir kontak dan tim kami
             akan segera menghubungi Anda.

@@ -48,18 +48,18 @@ export default function Header() {
   };
 
   return (
-    <section className="py-16 bg-light-base text-dark-base section-padding-x">
+    <section className="py-16 bg-light-base text-dark-base dark:bg-dark-base dark:text-light-base section-padding-x">
       <div className="max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1 space-y-8">
-            <div className="bg-white rounded-lg p-4 md:p-6 shadow-md">
-              <h3 className="font-bold text-sipil-base mb-2">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 md:p-6 shadow-md">
+              <h3 className="font-bold  dark:text-sipil-blue-accent mb-2">
                 Informasi Kontak
               </h3>
               <div className="space-y-4">
                 {/* Address */}
                 <div className="flex items-start gap-2 md:gap-3">
-                  <div className="p-2 bg-sipil-base/10 rounded-md text-sipil-base">
+                  <div className="p-2 bg-sipil-base/10 rounded-md  dark:text-sipil-blue-accent">
                     <svg
                       className="w-5 h-5"
                       fill="currentColor"
@@ -70,8 +70,8 @@ export default function Header() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-dark-base">Alamat</h4>
-                    <p className="text-gray-600 small-font-size">
+                    <h4 className="font-semibold">Alamat</h4>
+                    <p className="small-font-size">
                       Fakultas Teknik, Universitas Jenderal Soedirman Jl. Mayjen
                       Sungkono KM 5, Blater Purbalingga, Jawa Tengah 53371
                     </p>
@@ -79,7 +79,7 @@ export default function Header() {
                 </div>
                 {/* Phone */}
                 <div className="flex items-start gap-2 md:gap-3">
-                  <div className="p-2 bg-sipil-base/10 rounded-md text-sipil-base">
+                  <div className="p-2 bg-sipil-base/10 rounded-md  dark:text-sipil-blue-accent">
                     <svg
                       className="w-5 h-5"
                       fill="currentColor"
@@ -90,15 +90,15 @@ export default function Header() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-dark-base">Telepon</h4>
-                    <p className="text-gray-600 small-font-size">
+                    <h4 className="font-semibold">Telepon</h4>
+                    <p className="small-font-size">
                       +62 281 1234567
                     </p>
                   </div>
                 </div>
                 {/* Email */}
                 <div className="flex items-start gap-2 md:gap-3">
-                  <div className="p-2 bg-sipil-base/10 rounded-md text-sipil-base">
+                  <div className="p-2 bg-sipil-base/10 rounded-md  dark:text-sipil-blue-accent">
                     <svg
                       className="w-5 h-5"
                       fill="currentColor"
@@ -109,8 +109,8 @@ export default function Header() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-dark-base">Email</h4>
-                    <p className="text-gray-600 small-font-size">
+                    <h4 className="font-semibold">Email</h4>
+                    <p className="small-font-size">
                       tekniksipil@unsoed.ac.id
                     </p>
                   </div>
@@ -119,7 +119,7 @@ export default function Header() {
             </div>
             {/* Social Media */}
             <div className="bg-white rounded-lg p-4 md:p-6 shadow-md">
-              <h3 className="font-bold text-sipil-base mb-2">Media Sosial</h3>
+              <h3 className="font-bold  dark:text-sipil-blue-accent mb-2">Media Sosial</h3>
               <div className="grid grid-cols-2 gap-4">
                 <a
                   href="https://instagram.com/tekniksipil.unsoed"
@@ -192,7 +192,7 @@ export default function Header() {
             </div>
             {/* Office Hours */}
             <div className="bg-white rounded-lg p-4 md:p-6 shadow-md">
-              <h3 className="font-bold text-sipil-base mb-2">
+              <h3 className="font-bold  dark:text-sipil-blue-accent mb-2">
                 Jam Operasional
               </h3>
               <div className="space-y-2">
@@ -211,12 +211,11 @@ export default function Header() {
               </div>
             </div>
           </div>
-
           {/* Contact Form & Map */}
           <div className="lg:col-span-2 space-y-8">
             {/* Contact Form */}
             <div className="bg-white rounded-lg p-4 md:p-6 shadow-md">
-              <h3 className="font-bold text-sipil-base mb-2">
+              <h3 className="font-bold  dark:text-sipil-blue-accent mb-2">
                 Formulir Kontak
               </h3>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -327,7 +326,7 @@ export default function Header() {
 
             {/* Google Map */}
             <div className="bg-white rounded-lg p-4 md:p-6 shadow-md">
-              <h3 className="font-bold text-sipil-base mb-2">Lokasi Kami</h3>
+              <h3 className="font-bold  dark:text-sipil-blue-accent mb-2">Lokasi Kami</h3>
               <div className="h-80 rounded-lg overflow-hidden">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1978.1648376168541!2d109.33461809235955!3d-7.4287218758772315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6559814ade5b79%3A0xaef1b7bab5cba0f0!2sFakultas%20Teknik%20Universitas%20Jenderal%20Soedirman!5e0!3m2!1sid!2sid!4v1745769709621!5m2!1sid!2sid"

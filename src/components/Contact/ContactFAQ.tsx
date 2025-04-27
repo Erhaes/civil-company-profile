@@ -11,11 +11,11 @@ export default function ContactFAQ() {
   };
 
   return (
-    <section className="py-16 bg-gray-50 section-padding-x">
+    <section className="py-16 text-dark-base bg-light-base dark:bg-dark-base dark:text-light-base section-padding-x">
       <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-8">
         <div className="md:w-1/3">
           <h2 className="font-bold mb-2">Pertanyaan yang Sering Diajukan</h2>
-          <p className="text-gray-600">
+          <p className="">
             Berikut adalah beberapa pertanyaan yang sering diajukan oleh
             pengunjung website kami. Jika Anda tidak menemukan jawaban atas
             pertanyaan Anda, silakan hubungi kami.
@@ -25,7 +25,7 @@ export default function ContactFAQ() {
           {faqData.map((item, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300"
+              className="bg-white dark:bg-gray-100 rounded-lg shadow-sm overflow-hidden transition-all duration-300"
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -57,7 +57,7 @@ export default function ContactFAQ() {
                     : 'max-h-0 opacity-0'
                 }`}
               >
-                <p className="p-4 md:p-6 pt-1 md:pt-2 text-gray-600 border-t border-gray-100">
+                <p className="p-4 md:p-6 pt-1 md:pt-2 text-gray-secondary border-t border-gray-100">
                   {item.answer}
                 </p>
               </div>
