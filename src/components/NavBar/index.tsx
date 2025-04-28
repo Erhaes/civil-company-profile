@@ -9,24 +9,11 @@ export default function Navbar() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("color-theme");
-    if (storedTheme) {
-      setIsDarkMode(storedTheme === "dark");
-    } else {
-      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
-  }, []);
-
-  useEffect(() => {
     const root = document.documentElement;
-    if (isDarkMode) {
-      root.classList.add("dark");
-      localStorage.setItem("color-theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      localStorage.setItem("color-theme", "light");
-    }
-  }, [isDarkMode]);
+    root.classList.remove("dark");
+    localStorage.setItem("color-theme", "light");
+    setIsDarkMode(false);
+  }, []);
 
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);

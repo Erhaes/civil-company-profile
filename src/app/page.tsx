@@ -5,6 +5,10 @@ import HomepageAbout from "@/components/Homepage/HomepageAbout";
 import HomepageTestimonial from "@/components/Homepage/HomepageTestimonial";
 import HomepageCTA from "@/components/Homepage/HomepageCTA";
 
+export const metadata = {
+  title: "Beranda | Teknik Sipil Unsoed",
+};
+
 export default function Home() {
   return (
     <main>

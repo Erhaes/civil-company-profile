@@ -8,7 +8,7 @@ const laboratories: RuangLaboratorium[] = [
     nama: "Laboratorium Tanah",
     deskripsi:
       "Laboratorium Tanah adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap tanah, termasuk sifat fisik, kimia, dan mekanik tanah.",
-    foto: "/images/labs/lab-struktur.jpg",
+    foto: "/images/labs/lab-tanah.jpg",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const laboratories: RuangLaboratorium[] = [
     nama: "Laboratorium Hidrologi",
     deskripsi:
       "Laboratorium Hidrologi adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap air, termasuk kualitas air, aliran sungai, dan siklus hidrologi.",
-    foto: "/images/labs/lab-geoteknik.jpg",
+    foto: "/images/labs/lab-hidrologi.jpg",
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const laboratories: RuangLaboratorium[] = [
     nama: "Laboratorium Struktur dan Bahan Bangunan",
     deskripsi:
       "Laboratorium Struktur dan Bahan Bangunan adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap bahan bangunan, termasuk beton, baja, dan material lainnya.",
-    foto: "/images/labs/lab-hidrolika.jpg",
+    foto: "/images/labs/lab-struktur-bahan-bangunan.jpg",
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const laboratories: RuangLaboratorium[] = [
     nama: "Laboratorium Pemetaan",
     deskripsi:
       "Laboratorium Pemetaan adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap data pemetaan, termasuk survei tanah, pemetaan topografi, dan pemetaan geospasial.",
-    foto: "/images/labs/lab-transportasi.jpg",
+    foto: "/images/labs/lab-pemetaan.jpg",
   },
   {
     id: 5,
@@ -44,7 +44,7 @@ const laboratories: RuangLaboratorium[] = [
     nama: "Laboratorium Mekanika Tanah",
     deskripsi:
       "Laboratorium Mekanika Tanah adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap sifat mekanik tanah, termasuk kekuatan, kepadatan, dan permeabilitas tanah.",
-    foto: "/images/labs/lab-transportasi.jpg",
+    foto: "/images/labs/lab-mekanika-tanah.jpg",
   },
 ];
 
