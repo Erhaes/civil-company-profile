@@ -53,7 +53,7 @@ export default function Navbar() {
           : "lg:bg-transparent shadow-none"
       } py-4 bg-transparent backdrop-blur-md shadow-md dark:text-light-base dark:bg-transparent dark:backdrop-blur-md dark:shadow-md`}
     >
-      <div className="max-w-screen-xl flex items-center justify-between mx-auto">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <a href="#" className="flex items-center gap-2">
           <img src="/unsoed.png" className="w-12 md:w-16" alt="Unsoed Logo" />
           <div className="flex flex-col gap-1">

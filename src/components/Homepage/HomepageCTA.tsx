@@ -1,0 +1,34 @@
+export default function HomepageCTA() {
+  return (
+    <section
+      id="cta"
+      className="section-padding-x pt-12 pb-12 text-dark-base dark:text-light-base bg-light-base dark:bg-dark-base scroll-mt-12"
+    >
+      <div className="mx-auto max-w-screen-xl">
+        <div className="text-center mb-8 max-w-3xl mx-auto p-4 md:p-8 lg:p-12 xl:p-16 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 shadow-md">
+          <h2 className="font-bold mb-2 text-2xl md:text-3xl lg:text-4xl">
+            Siap Bergabung dengan Teknik Sipil UNSOED?
+          </h2>
+          <p className="text-gray-500 mb-6 md:text-lg">
+            Mari bergabung dengan komunitas Teknik Sipil UNSOE dan wujudkan
+            impianmu menjadi ahli di bidang teknik sipil bersama kami!
+          </p>
+          <div className="flex justify-center gap-4">
+            <a
+              href="https://discord.gg/W4XyRAmPSD"
+              className="text-light-base bg-gradient-to-br from-sipil-base to-sipil-secondary px-4 py-2 md:px-6 md:py-3 rounded-xl font-semibold transition-all duration-300 shadow hover:shadow-lg"
+            >
+              Kunjungi Laboratorium
+            </a>
+            <a
+              href="https://www.facebook.com/groups/programmerhandal"
+              className="px-4 py-2 md:px-6 md:py-3 border border-sipil-base rounded-xl font-semibold transition-all duration-300 text-sipil-base hover:bg-sipil-base hover:text-white"
+            >
+              Daftar Sekarang
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

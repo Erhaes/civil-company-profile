@@ -65,3 +65,18 @@ export interface KerjasamaIndustri {
   tahunMulai: string;
   logo: string;
 }
+
+export interface RuangLaboratorium {
+  id: number;
+  nama: string;
+  deskripsi: string;
+  foto: string;
+}
+
+export interface Testimonial {
+    name: string;
+    title: string;
+    company: string;
+    text: string;
+    image: string;
+};

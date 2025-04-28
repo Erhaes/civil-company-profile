@@ -1,11 +1,19 @@
-import About from "@/components/Homepage/About";
-import Hero from "@/components/Homepage/Hero";
+import HomepageFacilities from "@/components/Homepage/HomapageFacilities";
+import HomepageLaboratories from "@/components/Homepage/HomepageLaboratories";
+import HomepageHero from "@/components/Homepage/HomepageHero";
+import HomepageAbout from "@/components/Homepage/HomepageAbout";
+import HomepageTestimonial from "@/components/Homepage/HomepageTestimonial";
+import HomepageCTA from "@/components/Homepage/HomepageCTA";
 
 export default function Home() {
   return (
     <main>
-      <Hero />
-      <About />
+      <HomepageHero />
+      <HomepageAbout />
+      <HomepageLaboratories />
+      <HomepageFacilities />
+      <HomepageTestimonial />
+      <HomepageCTA />
     </main>
   );
 }

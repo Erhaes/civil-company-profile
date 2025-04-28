@@ -6,10 +6,6 @@
         path: "/",
       },
       {
-        title: "Informasi",
-        path: "/informasi",
-      },
-      {
         title: "Profil",
         path: "/profil",
       },

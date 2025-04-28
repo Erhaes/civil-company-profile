@@ -1,4 +1,4 @@
-export default function Hero() {
+export default function HomepageHero() {
   return (
     <section
       id="hero"
