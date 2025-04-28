@@ -33,8 +33,8 @@ export default function HomepageAbout() {
           {/* Left Column - Image */}
           <div className="relative rounded-lg overflow-hidden h-full">
             <img
-              src="/images/backgrounds/civil-gathering.png"
-              alt="Laboratorium Teknik Sipil Unsoed"
+              src="/images/backgrounds/ufuk-unsoed.webp"
+              alt="Gedung Teknik Unsoed"
               className="rounded-lg shadow-lg w-full h-full object-cover"
             />
             <div className="absolute top-4 left-4 bg-sipil-base text-light-base py-1 px-3 rounded-md shadow-md small-font-size font-medium">

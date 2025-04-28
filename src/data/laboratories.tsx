@@ -3,30 +3,47 @@ import { RuangLaboratorium } from "@/types";
 const laboratories: RuangLaboratorium[] = [
   {
     id: 1,
-    nama: "Laboratorium Struktur",
+    ruang: "D 101",
+    kode: "LT",
+    nama: "Laboratorium Tanah",
     deskripsi:
-      "Melakukan pengujian material bangunan, analisis struktur, dan simulasi gempa untuk konstruksi bangunan.",
+      "Laboratorium Tanah adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap tanah, termasuk sifat fisik, kimia, dan mekanik tanah.",
     foto: "/images/labs/lab-struktur.jpg",
   },
   {
     id: 2,
-    nama: "Laboratorium Geoteknik",
+    ruang: "D 102",
+    kode: "LH",
+    nama: "Laboratorium Hidrologi",
     deskripsi:
-      "Fokus pada penelitian tanah, fondasi, dan geologi teknik untuk konstruksi bangunan dan infrastruktur.",
+      "Laboratorium Hidrologi adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap air, termasuk kualitas air, aliran sungai, dan siklus hidrologi.",
     foto: "/images/labs/lab-geoteknik.jpg",
   },
   {
     id: 3,
-    nama: "Laboratorium Hidrolika",
+    ruang: "D 103",
+    kode: "LSBB",
+    nama: "Laboratorium Struktur dan Bahan Bangunan",
     deskripsi:
-      "Meneliti aliran air, sistem drainase, dan desain struktur hidraulik untuk infrastruktur pengendalian air.",
+      "Laboratorium Struktur dan Bahan Bangunan adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap bahan bangunan, termasuk beton, baja, dan material lainnya.",
     foto: "/images/labs/lab-hidrolika.jpg",
   },
   {
     id: 4,
-    nama: "Laboratorium Transportasi",
+    ruang: "D 104",
+  kode: "LP",
+    nama: "Laboratorium Pemetaan",
     deskripsi:
-      "Mengkaji sistem transportasi, perkerasan jalan, dan manajemen lalu lintas untuk infrastruktur transportasi.",
+      "Laboratorium Pemetaan adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap data pemetaan, termasuk survei tanah, pemetaan topografi, dan pemetaan geospasial.",
+    foto: "/images/labs/lab-transportasi.jpg",
+  },
+  {
+    id: 5,
+    ruang: "D 105",
+    kode: "LMT",
+    nama: "Laboratorium Mekanika Tanah",
+    deskripsi:
+      "Laboratorium Mekanika Tanah adalah laboratorium yang digunakan untuk melakukan pengujian dan analisis terhadap sifat mekanik tanah, termasuk kekuatan, kepadatan, dan permeabilitas tanah.",
     foto: "/images/labs/lab-transportasi.jpg",
   },
 ];

@@ -16,7 +16,6 @@ export default function Navbar() {
       setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
     }
   }, []);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -29,17 +28,6 @@ export default function Navbar() {
     }
   }, [isDarkMode]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };
@@ -47,11 +35,7 @@ export default function Navbar() {
   return (
     <nav
       id="navbar"
-      className={`section-padding-x fixed top-0 w-full z-[998] text-dark-base normal-font-size transition-all duration-300 ${
-        isScrolled
-          ? "backdrop-blur-md shadow-md"
-          : "lg:bg-transparent shadow-none"
-      } py-4 bg-transparent backdrop-blur-md shadow-md dark:text-light-base dark:bg-transparent dark:backdrop-blur-md dark:shadow-md`}
+      className={`section-padding-x fixed top-0 w-full z-[998] bg-light-base text-dark-base normal-font-size transition-all duration-300 py-4 backdrop-blur-md shadow-md dark:text-light-base dark:bg-transparent dark:backdrop-blur-md dark:shadow-md`}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <a href="#" className="flex items-center gap-2">

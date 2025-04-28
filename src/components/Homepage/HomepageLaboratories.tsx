@@ -16,7 +16,7 @@ export default function HomepageLaboratories() {
             Kegiatan Penelitian.
           </h2>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {laboratories.map((lab, index) => (
             <div
               key={index}
@@ -32,7 +32,16 @@ export default function HomepageLaboratories() {
               </div>
               <div className="p-4">
                 <h3 className="font-semibold mb-1">{lab.nama}</h3>
-                <p className="text-gray-500 mb-4">{lab.deskripsi}</p>
+                <p
+                  className="text-gray-500 mb-4 line-clamp-3"
+                  style={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                  }}
+                >
+                  {lab.deskripsi}
+                </p>
                 <a
                   href="/"
                   target="_blank"

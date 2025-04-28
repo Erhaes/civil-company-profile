@@ -68,6 +68,8 @@ export interface KerjasamaIndustri {
 
 export interface RuangLaboratorium {
   id: number;
+  ruang: string;
+  kode: string;
   nama: string;
   deskripsi: string;
   foto: string;
