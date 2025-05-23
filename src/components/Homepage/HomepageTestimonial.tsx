@@ -6,6 +6,8 @@ import { useMediaQuery } from "react-responsive";
 import { type Testimonial } from "@/types";
 
 export default function HomepageTestimonial() {
+    // Create a state to track client-side mounting
+    const [isMounted, setIsMounted] = useState(false);
     const container1Ref = useRef<HTMLDivElement>(null);
     const container2Ref = useRef<HTMLDivElement>(null);
     const animationRef1 = useRef<number | undefined>(undefined);
@@ -21,7 +23,19 @@ export default function HomepageTestimonial() {
     const [direction2, setDirection2] = useState<
         "up" | "down" | "left" | "right"
     >("down");
-    const isLargeScreen = useMediaQuery({ minWidth: 1024 });
+    
+    // Use state instead of direct hook for isLargeScreen
+    const [isLargeScreen, setIsLargeScreen] = useState(false);
+    // Use this for the media query
+    const isLargeScreenQuery = useMediaQuery({ minWidth: 1024 }, undefined, (match) => {
+        if (isMounted) setIsLargeScreen(match);
+    });
+
+    // Set the initial state after mount
+    useEffect(() => {
+        setIsMounted(true);
+        setIsLargeScreen(isLargeScreenQuery);
+    }, [isLargeScreenQuery]);
 
     if (!isLargeScreen) {
         animationDuration = 10;
@@ -71,6 +85,8 @@ export default function HomepageTestimonial() {
     };
 
     useEffect(() => {
+        if (!isMounted) return;
+        
         const verticalDirection1 =
             direction1 === "left"
                 ? "up"
@@ -80,8 +96,8 @@ export default function HomepageTestimonial() {
         const verticalDirection2 =
             direction2 === "left"
                 ? "up"
-                : direction2 === "right"
-                ? "down"
+                : direction2 === "down"
+                ? "right"
                 : direction2;
         const horizontalDirection1 =
             direction1 === "up"
@@ -126,7 +142,7 @@ export default function HomepageTestimonial() {
             if (animationRef1.current) cancelAnimationFrame(animationRef1.current);
             if (animationRef2.current) cancelAnimationFrame(animationRef2.current);
         };
-    }, [direction1, direction2, isLargeScreen]);
+    }, [direction1, direction2, isLargeScreen, isMounted]);
 
     return (
         <section
@@ -150,34 +166,60 @@ export default function HomepageTestimonial() {
                         Pelajari Lebih Lanjut
                     </a>
                 </div>
-                <div className="flex flex-col lg:flex-row gap-4">
-                    <div
-                        className="flex flex-row-reverse lg:flex-col gap-4 w-full lg:w-auto"
-                        ref={container1Ref}
-                        style={{ whiteSpace: isLargeScreen ? "normal" : "nowrap" }}
-                    >
-                        {testimonials1.map((testimonial, index) => (
-                            <TestimonialCard
-                                key={index}
-                                testimonial={testimonial}
-                                isHorizontal={!isLargeScreen}
-                            />
-                        ))}
+                
+                {/* Only render the scrolling sections after client-side mount */}
+                {isMounted ? (
+                    <div className="flex flex-col lg:flex-row gap-4">
+                        <div
+                            className="flex flex-row-reverse lg:flex-col gap-4 w-full lg:w-auto"
+                            ref={container1Ref}
+                            style={{ whiteSpace: isLargeScreen ? "normal" : "nowrap" }}
+                        >
+                            {testimonials1.map((testimonial, index) => (
+                                <TestimonialCard
+                                    key={index}
+                                    testimonial={testimonial}
+                                    isHorizontal={!isLargeScreen}
+                                />
+                            ))}
+                        </div>
+                        <div
+                            className="flex flex-row lg:flex-col gap-4 w-full lg:w-auto"
+                            ref={container2Ref}
+                            style={{ whiteSpace: isLargeScreen ? "normal" : "nowrap" }}
+                        >
+                            {testimonials2.map((testimonial, index) => (
+                                <TestimonialCard
+                                    key={index}
+                                    testimonial={testimonial}
+                                    isHorizontal={!isLargeScreen}
+                                />
+                            ))}
+                        </div>
                     </div>
-                    <div
-                        className="flex flex-row lg:flex-col gap-4 w-full lg:w-auto"
-                        ref={container2Ref}
-                        style={{ whiteSpace: isLargeScreen ? "normal" : "nowrap" }}
-                    >
-                        {testimonials2.map((testimonial, index) => (
-                            <TestimonialCard
-                                key={index}
-                                testimonial={testimonial}
-                                isHorizontal={!isLargeScreen}
-                            />
-                        ))}
+                ) : (
+                    // Static placeholder content for server-side rendering
+                    <div className="flex flex-col lg:flex-row gap-4">
+                        <div className="flex flex-col gap-4 w-full lg:w-auto">
+                            {testimonials1.slice(0, 2).map((testimonial, index) => (
+                                <TestimonialCard
+                                    key={index}
+                                    testimonial={testimonial}
+                                    isHorizontal={false}
+                                />
+                            ))}
+                        </div>
+                        <div className="flex flex-col gap-4 w-full lg:w-auto">
+                            {testimonials2.slice(0, 2).map((testimonial, index) => (
+                                <TestimonialCard
+                                    key={index}
+                                    testimonial={testimonial}
+                                    isHorizontal={false}
+                                />
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </section>
     );

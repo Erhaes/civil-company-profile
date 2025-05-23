@@ -21,51 +21,35 @@ export default function HomepageHero() {
                 <path d="M256 32c-17.7 0-32 14.3-32 32l0 2.3 0 99.6c0 5.6-4.5 10.1-10.1 10.1c-3.6 0-7-1.9-8.8-5.1L157.1 87C83 123.5 32 199.8 32 288l0 64 512 0 0-66.4c-.9-87.2-51.7-162.4-125.1-198.6l-48 83.9c-1.8 3.2-5.2 5.1-8.8 5.1c-5.6 0-10.1-4.5-10.1-10.1l0-99.6 0-2.3c0-17.7-14.3-32-32-32l-64 0zM16.6 384C7.4 384 0 391.4 0 400.6c0 4.7 2 9.2 5.8 11.9C27.5 428.4 111.8 480 288 480s260.5-51.6 282.2-67.5c3.8-2.8 5.8-7.2 5.8-11.9c0-9.2-7.4-16.6-16.6-16.6L16.6 384z" />
               </svg>
               <p className="extra-small-font-size">
-                Pusat Keunggulan Teknik Sipil Indonesia
+                Laboratorium Teknik Sipil Unsoed
               </p>
             </span>
             <h1 className="font-bold mb-2 md:text-left">
               Membangun Masa Depan Infrastruktur yang Berkelanjutan
             </h1>
             <p className="mb-4 md:mb-8">
-              Bergabunglah bersama kami di{" "}
-              <span className="bg-sipil-base text-light-base">
-                Teknik Sipil Unsoed
-              </span>
-              , tempat di mana inovasi dan keunggulan dalam bidang teknik sipil
-              bertemu. Kami menyediakan berbagai program pelatihan, penelitian,
-              dan kolaborasi untuk mendukung pengembangan infrastruktur yang
-              berkualitas dan berkelanjutan.
+              Laboratorium Teknik Sipil Unsoed berfungsi sebagai pusat
+              pembelajaran praktis dan eksperimental yang dipergunakan oleh
+              mahasiswa Fakultas Teknik Unsoed dan pelayanan untuk mitra dari
+              luar Laboratorium Teknik Sipil Unsoed yang mencakup bidang
+              Struktur dan Bahan Bangunan, Mekanika Tanah dan Hidraulika,
+              Transportasi, Mekanika Keairan dan Teknik Lingkungan.
             </p>
             <div className="flex flex-wrap gap-2">
               <a
-                href="https://facebook.com"
+                href="#"
                 className="rounded-md bg-blue-base text-light-base py-2 px-4 font-semibold hover:bg-blue-quaternary hover:text-blue-base transition duration-300 small-font-size"
               >
                 Reservasi Laboratorium
               </a>
               <a
-                href="https://discord.gg"
+                href="https://www.youtube.com/watch?v=6rR5R_Tc_zE&t=14s&pp=0gcJCY0JAYcqIYzv"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-md border border-blue-base text-blue-base py-2 px-4 font-semibold hover:bg-blue-quaternary transition duration-300 small-font-size"
               >
-                Hubungi Kami
+                Tonton Video
               </a>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row xl:justify-between gap-4">
-            <div className="text-dark-base dark:text-light-base flex gap-8 justify-between items-center rounded-lg text-center">
-              <div className="flex flex-col gap-2 border-r-2 border-gray-200 pr-4">
-                <h4 className="font-semibold">30+</h4>
-                <p className="extra-small-font-size">Dosen Ahli</p>
-              </div>
-              <div className="flex flex-col gap-2 border-r-2 border-gray-200 pr-4">
-                <h4 className="font-semibold">500+</h4>
-                <p className="extra-small-font-size">Lulusan Berkualitas</p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <h4 className="font-semibold">10K+</h4>
-                <p className="extra-small-font-size">Mahasiswa Aktif</p>
-              </div>
             </div>
           </div>
         </div>

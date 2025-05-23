@@ -1,9 +1,9 @@
 import HomepageFacilities from "@/components/Homepage/HomapageFacilities";
-import HomepageLaboratories from "@/components/Homepage/HomepageLaboratories";
 import HomepageHero from "@/components/Homepage/HomepageHero";
 import HomepageAbout from "@/components/Homepage/HomepageAbout";
 import HomepageTestimonial from "@/components/Homepage/HomepageTestimonial";
 import HomepageCTA from "@/components/Homepage/HomepageCTA";
+import HomepageAccreditation from "@/components/Homepage/HomepageAccreditation";
 
 export const metadata = {
   title: "Beranda | Teknik Sipil Unsoed",
@@ -14,8 +14,8 @@ export default function Home() {
     <main>
       <HomepageHero />
       <HomepageAbout />
-      <HomepageLaboratories />
       <HomepageFacilities />
+      <HomepageAccreditation />
       <HomepageTestimonial />
       <HomepageCTA />
     </main>
