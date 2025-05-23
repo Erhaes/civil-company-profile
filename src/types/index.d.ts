@@ -93,3 +93,25 @@ export interface Research {
   publication: string;
   link: string;
 }
+
+export interface FacilityType {
+  id: number;
+  name: string;
+}
+
+export interface Gear {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+}
+
+export interface Facility {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  type: FacilityType;
+  room: string;
+  gears: Gear[];
+}
