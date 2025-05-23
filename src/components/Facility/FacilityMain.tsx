@@ -193,7 +193,7 @@ export default function FacilityMain() {
               </div>
               <div className="p-5">
                 <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-lg font-bold text-sipil-base">{facility.name}</h3>
+                  <h3 className="text-lg font-bold text-sipil-base line-clamp-2">{facility.name}</h3>
                   <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-md">
                     {facility.room}
                   </span>
