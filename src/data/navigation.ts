@@ -10,6 +10,18 @@
         path: "/profil",
       },
       {
+        title: "Fasilitas",
+        path: "/fasilitas",
+      },
+      {
+        title: "Pengujian",
+        path: "/pengujian",
+      },
+      {
+        title: "Penelitian",
+        path: "/penelitian",
+      },
+      {
           title: "Kontak",
           path: "/kontak",
       },

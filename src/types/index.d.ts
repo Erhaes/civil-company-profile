@@ -76,9 +76,20 @@ export interface RuangLaboratorium {
 }
 
 export interface Testimonial {
-    name: string;
-    title: string;
-    company: string;
-    text: string;
-    image: string;
-};
+  name: string;
+  title: string;
+  company: string;
+  text: string;
+  image: string;
+}
+
+export interface Research {
+  id: number;
+  title: string;
+  abstract: string;
+  authors: string[];
+  year: number;
+  keywords: string[];
+  publication: string;
+  link: string;
+}

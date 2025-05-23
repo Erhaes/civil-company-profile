@@ -3,9 +3,9 @@
 import { useState } from "react";
 import {
   strukturOrganisasi,
-  dosenList,
+  // dosenList,
   kerjasamaList,
-  labList,
+  // labList,
   prestasiList,
   sertifikasiList,
 } from "@/data/profile";
@@ -27,7 +27,7 @@ export default function ProfileMain() {
           >
             Struktur Organisasi
           </button>
-          <button
+          {/* <button
             onClick={() => setActiveTab("dosen")}
             className={`py-2 px-4 font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === "dosen"
@@ -36,8 +36,8 @@ export default function ProfileMain() {
             }`}
           >
             Dosen dan Tenaga Pengajar
-          </button>
-          <button
+          </button> */}
+          {/* <button
             onClick={() => setActiveTab("laboratorium")}
             className={`py-2 px-4 font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === "laboratorium"
@@ -46,7 +46,7 @@ export default function ProfileMain() {
             }`}
           >
             Pengurus Laboratorium
-          </button>
+          </button> */}
           <button
             onClick={() => setActiveTab("prestasi")}
             className={`py-2 px-4 font-medium border-b-2 transition-colors whitespace-nowrap ${
@@ -90,7 +90,6 @@ export default function ProfileMain() {
                   Diagram Struktur Organisasi
                 </h3>
                 <div className="bg-gray-100 p-4 rounded flex justify-center">
-                  {/* Placeholder untuk diagram struktur organisasi */}
                   <div className="w-full max-w-3xl h-80 bg-white border rounded-lg flex items-center justify-center">
                     <p className="text-gray-500">
                       Diagram Struktur Organisasi Teknik Sipil UNSOED
@@ -110,7 +109,6 @@ export default function ProfileMain() {
                   >
                     <div className="aspect-w-1 aspect-h-1 bg-gray-200">
                       <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
-                        {/* Placeholder foto */}
                         <span className="text-gray-500">
                           Foto {pejabat.nama}
                         </span>
@@ -130,7 +128,7 @@ export default function ProfileMain() {
         )}
 
         {/* Dosen dan Tenaga Pengajar */}
-        {activeTab === "dosen" && (
+        {/* {activeTab === "dosen" && (
           <div className="pt-8">
             <h2 className="text-3xl font-bold mb-2 md:mb-4 text-gray-800">
               Dosen dan Tenaga Pengajar
@@ -144,7 +142,6 @@ export default function ProfileMain() {
                   >
                     <div className="aspect-w-1 aspect-h-1 bg-gray-200">
                       <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
-                        {/* Placeholder foto */}
                         <span className="text-gray-500">Foto {dosen.nama}</span>
                       </div>
                     </div>
@@ -174,10 +171,10 @@ export default function ProfileMain() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Pengurus Laboratorium */}
-        {activeTab === "laboratorium" && (
+        {/* {activeTab === "laboratorium" && (
           <div className="pt-8">
             <h2 className="text-3xl font-bold mb-2 md:mb-4 text-gray-800">
               Pengurus Laboratorium
@@ -188,7 +185,6 @@ export default function ProfileMain() {
                   <div className="flex flex-col md:flex-row">
                     <div className="md:w-1/3 mb-4 md:mb-0 md:mr-6">
                       <div className="w-full h-48 bg-gray-300 rounded flex items-center justify-center">
-                        {/* Placeholder foto */}
                         <span className="text-gray-500">{lab.nama}</span>
                       </div>
                     </div>
@@ -226,7 +222,7 @@ export default function ProfileMain() {
               ))}
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Prestasi dan Pencapaian */}
         {activeTab === "prestasi" && (
