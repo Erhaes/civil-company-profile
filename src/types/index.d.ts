@@ -115,3 +115,25 @@ export interface Facility {
   room: string;
   gears: Gear[];
 }
+
+export interface TestImage {
+  id: number;
+  image: string;
+}
+
+export interface TestUnit {
+  id: number;
+  name: string;
+}
+
+export interface Test {
+  id: number;
+  name: string;
+  description: string;
+  images: TestImage[];
+  minimum_unit: number;
+  daily_slot: number;
+  is_active: boolean;
+  laboratory: Facility;
+  unit: TestUnit;
+}
