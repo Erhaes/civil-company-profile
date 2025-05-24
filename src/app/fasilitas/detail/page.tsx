@@ -31,6 +31,12 @@ const facility: Facility = {
   room: "D.101",
 };
 
+export const metadata = {
+  title: "Detail Fasilitas | Sipil UNSOED",
+  description:
+    "Detail informasi mengenai fasilitas yang tersedia di Program Studi Teknik Sipil UNSOED.",
+};
+
 export default function FacilityDetail() {
   return (
     <main>

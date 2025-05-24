@@ -29,12 +29,14 @@ export default function Navbar() {
           <img src="/unsoed.png" className="w-12 md:w-16" alt="Unsoed Logo" />
           <div className="flex flex-col gap-1">
             <span className="normal-font-size font-bold">Teknik Sipil</span>
-            <span className="extra-small-font-size">Universitas Jenderal Soedirman</span>
+            <span className="extra-small-font-size">
+              Universitas Jenderal Soedirman
+            </span>
           </div>
         </a>
         <button
           type="button"
-          className="lg:hidden text-dark-base dark:text-light-base relative z-[999] focus:outline-none"
+          className="xl:hidden text-dark-base dark:text-light-base relative z-[999] focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <svg
@@ -47,11 +49,11 @@ export default function Navbar() {
           </svg>
         </button>
         <div
-          className={`w-full lg:block lg:w-auto ${
+          className={`w-full xl:block xl:w-auto ${
             isMenuOpen ? "block" : "hidden"
           }`}
         >
-          <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border dark:border-gray-200 border-gray-400 rounded-lg lg:flex-row rtl:space-x-reverse lg:mt-0 lg:border-none gap-2 lg:gap-4">
+          <ul className="font-medium flex flex-col p-4 xl:p-0 mt-4 border dark:border-gray-200 border-gray-400 rounded-xl xl:flex-row rtl:space-x-reverse xl:mt-0 xl:border-none gap-2 xl:gap-4">
             {navigation.map((route, index) => (
               <NavigationLink
                 key={index}
