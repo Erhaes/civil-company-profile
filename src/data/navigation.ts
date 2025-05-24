@@ -22,6 +22,10 @@
         path: "/penelitian",
       },
       {
+        title: "Berita",
+        path: "/berita",
+      },
+      {
           title: "Kontak",
           path: "/kontak",
       },

@@ -137,3 +137,25 @@ export interface Test {
   laboratory: Facility;
   unit: TestUnit;
 }
+
+export interface NewsCategory  {
+  id: number;
+  name: string;
+}
+
+export interface UserNews {
+  id: number;
+  name: string;
+  email: string;
+  photo: string;
+}
+
+export interface News {
+  id: number;
+  title: string;
+  content: string;
+  thumbnail: string;
+  date: string;
+  category: NewsCategory;
+  user: UserNews;
+}
