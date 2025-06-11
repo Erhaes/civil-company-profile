@@ -1,67 +1,74 @@
-'use client';
+"use client";
 import { useEffect, useState } from "react";
 import downloadsData from "@/data/download";
+import apiClient from "@/services/apiClient";
 
+const fetchDownloads = async () => {
+  const response = await apiClient.get("/research");
+
+  return response.data.data;
+};
 
 export default function DownloadMain() {
-      // State untuk menyimpan data yang ditampilkan
-    //   const [data, setData] = useState(downloadsData);
-      const [filteredData, setFilteredData] = useState(downloadsData);
-      const [searchTerm, setSearchTerm] = useState("");
-      const [rowsPerPage, setRowsPerPage] = useState(10);
-      const [currentPage, setCurrentPage] = useState(1);
-      const [selectedCategory, setSelectedCategory] = useState("Semua");
-    
-      // Daftar kategori unik dari data
-      const categories = [
-        "Semua",
-        ...Array.from(new Set(downloadsData.map((item) => item.category))),
-      ];
-    
-      // Filter data berdasarkan pencarian dan kategori
-      useEffect(() => {
-        let result = downloadsData;
-    
-        // Filter berdasarkan kategori
-        if (selectedCategory !== "Semua") {
-          result = result.filter((item) => item.category === selectedCategory);
-        }
-    
-        // Filter berdasarkan pencarian
-        if (searchTerm) {
-          const lowerSearchTerm = searchTerm.toLowerCase();
-          result = result.filter(
-            (item) =>
-              item.title.toLowerCase().includes(lowerSearchTerm) ||
-              item.description.toLowerCase().includes(lowerSearchTerm)
-          );
-        }
-    
-        setFilteredData(result);
-        setCurrentPage(1); // Reset halaman saat filter berubah
-      }, [searchTerm, selectedCategory]);
-    
-      // Menghitung total halaman
-      const totalPages = Math.ceil(filteredData.length / rowsPerPage);
-    
-      // Data yang ditampilkan pada halaman saat ini
-      const currentData = filteredData.slice(
-        (currentPage - 1) * rowsPerPage,
-        currentPage * rowsPerPage
+  // State untuk menyimpan data yang ditampilkan
+  //   const [data, setData] = useState(downloadsData);
+  const [filteredData, setFilteredData] = useState(downloadsData);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState("Semua");
+  const downsData = fetchDownloads();
+  console.log("downloadsData", downsData);
+
+  // Daftar kategori unik dari data
+  const categories = [
+    "Semua",
+    ...Array.from(new Set(downloadsData.map((item) => item.category))),
+  ];
+
+  // Filter data berdasarkan pencarian dan kategori
+  useEffect(() => {
+    let result = downloadsData;
+
+    // Filter berdasarkan kategori
+    if (selectedCategory !== "Semua") {
+      result = result.filter((item) => item.category === selectedCategory);
+    }
+
+    // Filter berdasarkan pencarian
+    if (searchTerm) {
+      const lowerSearchTerm = searchTerm.toLowerCase();
+      result = result.filter(
+        (item) =>
+          item.title.toLowerCase().includes(lowerSearchTerm) ||
+          item.description.toLowerCase().includes(lowerSearchTerm)
       );
-    
-      // Fungsi untuk mengubah halaman
-      const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-      };
-    
-      // Fungsi untuk mengubah jumlah baris per halaman
-      const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setRowsPerPage(Number(e.target.value));
-        setCurrentPage(1); // Reset ke halaman pertama saat mengubah jumlah baris
-      };
-    
-    
+    }
+
+    setFilteredData(result);
+    setCurrentPage(1); // Reset halaman saat filter berubah
+  }, [searchTerm, selectedCategory]);
+
+  // Menghitung total halaman
+  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+
+  // Data yang ditampilkan pada halaman saat ini
+  const currentData = filteredData.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
+  // Fungsi untuk mengubah halaman
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  // Fungsi untuk mengubah jumlah baris per halaman
+  const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setRowsPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset ke halaman pertama saat mengubah jumlah baris
+  };
+
   return (
     <section className="py-16 bg-light-base text-dark-base section-padding-x">
       <div className="max-w-screen-xl mx-auto">
@@ -148,11 +155,19 @@ export default function DownloadMain() {
             <table className="w-full">
               <thead>
                 <tr className="bg-sipil-base text-white">
-                  <th className="px-4 py-2 md:px-6 md:py-3 text-left w-12">No</th>
+                  <th className="px-4 py-2 md:px-6 md:py-3 text-left w-12">
+                    No
+                  </th>
                   <th className="px-4 py-2 md:px-6 md:py-3 text-left">Judul</th>
-                  <th className="px-4 py-2 md:px-6 md:py-3 text-left">Keterangan</th>
-                  <th className="px-4 py-2 md:px-6 md:py-3 text-center">Ukuran</th>
-                  <th className="px-4 py-2 md:px-6 md:py-3 text-center">Aksi</th>
+                  <th className="px-4 py-2 md:px-6 md:py-3 text-left">
+                    Keterangan
+                  </th>
+                  <th className="px-4 py-2 md:px-6 md:py-3 text-center">
+                    Ukuran
+                  </th>
+                  <th className="px-4 py-2 md:px-6 md:py-3 text-center">
+                    Aksi
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -180,7 +195,9 @@ export default function DownloadMain() {
                         </p>
                       </td>
                       <td className="px-4 py-2 md:px-6 md:py-3 text-center whitespace-nowrap">
-                        <span className="text-gray-600 extra-small-font-size">{item.fileSize}</span>
+                        <span className="text-gray-600 extra-small-font-size">
+                          {item.fileSize}
+                        </span>
                       </td>
                       <td className="px-4 py-2 md:px-6 md:py-3 text-center whitespace-nowrap">
                         <a
