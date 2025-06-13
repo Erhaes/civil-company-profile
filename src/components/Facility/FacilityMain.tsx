@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import apiClient from "@/services/apiClient";
+import { Equipment, Package, Test } from "@/types";
 
 interface Laboratory {
   id: number;
@@ -11,13 +12,13 @@ interface Laboratory {
   name: string;
   room: string;
   description: string;
-  image: string;
+  images: string[];
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
-  equipments: any[];
-  packages: any[];
-  tests: any[];
+  equipments: Equipment[];
+  packages: Package[];
+  tests: Test[];
 }
 
 interface ApiResponse {
@@ -40,34 +41,22 @@ interface ApiResponse {
   total: number;
 }
 
-const fetchFacilities = async (
-  page: number = 1,
-  perPage: number = 16,
-  search: string = ""
-) => {
+const fetchFacilities = async (page: number = 1, perPage: number = 16) => {
   const params = new URLSearchParams({
     page: page.toString(),
     per_page: perPage.toString(),
   });
-
-  if (search.trim() !== "") {
-    params.append("search", search);
-  }
 
   const response = await apiClient.get(`/labs?${params.toString()}`);
   return response.data;
 };
 
 export default function FacilityMain() {
-  const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(16);
+  const [itemsPerPage] = useState<number>(16);
   const [apiData, setApiData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(
-    null
-  );
 
   // Fetch data from API
   useEffect(() => {
@@ -75,11 +64,7 @@ export default function FacilityMain() {
       try {
         setLoading(true);
         setError(null);
-        const data = await fetchFacilities(
-          currentPage,
-          itemsPerPage,
-          searchQuery
-        );
+        const data = await fetchFacilities(currentPage, itemsPerPage);
         setApiData(data);
       } catch (err) {
         console.error("Failed to fetch facilities:", err);
@@ -92,50 +77,10 @@ export default function FacilityMain() {
     loadFacilities();
   }, [currentPage, itemsPerPage]);
 
-  // Handle search with debounce
-  useEffect(() => {
-    if (searchTimeout) {
-      clearTimeout(searchTimeout);
-    }
-
-    const timeout = setTimeout(() => {
-      const loadSearchResults = async () => {
-        try {
-          setLoading(true);
-          setError(null);
-          setCurrentPage(1); // Reset to first page on search
-          const data = await fetchFacilities(1, itemsPerPage, searchQuery);
-          setApiData(data);
-        } catch (err) {
-          console.error("Failed to search facilities:", err);
-          setError("Gagal mencari fasilitas. Silakan coba lagi.");
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      loadSearchResults();
-    }, 500); // 500ms debounce
-
-    setSearchTimeout(timeout);
-
-    return () => {
-      if (timeout) clearTimeout(timeout);
-    };
-  }, [searchQuery, itemsPerPage]);
-
   // Handle page change
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  // Handle items per page change
-  const handleItemsPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setItemsPerPage(Number(e.target.value));
-    setCurrentPage(1); // Reset to first page
   };
 
   // Generate page numbers for pagination
@@ -169,60 +114,11 @@ export default function FacilityMain() {
   const pageNumbers = generatePageNumbers();
   const facilities = apiData?.data || [];
 
+  console.log("Facilities:", facilities);
+
   return (
     <section className="bg-light-base section-padding-x py-16">
       <div className="max-w-screen-xl mx-auto">
-        {/* Combined Control Bar */}
-        <div className="bg-white rounded-lg shadow-md p-4 mb-8 flex flex-col md:flex-row gap-4 md:items-center">
-          {/* Search Bar */}
-          <div className="relative flex-grow">
-            <input
-              type="text"
-              placeholder="Cari fasilitas..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-sipil-base"
-            />
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg
-                className="h-5 w-5 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </div>
-          </div>
-
-          {/* Items Per Page Selector & Pagination Info */}
-          <div className="flex text-sm items-center gap-2 whitespace-nowrap">
-            {apiData && (
-              <span className="hidden md:inline text-gray-600">
-                {apiData.from}-{apiData.to} dari {apiData.total}
-              </span>
-            )}
-            <select
-              id="itemsPerPage"
-              value={itemsPerPage}
-              onChange={handleItemsPerPageChange}
-              className="border border-gray-300 rounded px-2 py-2 text-sm"
-              aria-label="Items per page"
-            >
-              <option value="8">8</option>
-              <option value="16">16</option>
-              <option value="24">24</option>
-              <option value="32">32</option>
-            </select>
-            <span className="text-gray-600">per halaman</span>
-          </div>
-        </div>
-
         {/* Error Message */}
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
@@ -264,16 +160,18 @@ export default function FacilityMain() {
                     src={`${
                       process.env.NEXT_PUBLIC_API_BASE_URL ||
                       "http://127.0.0.1:8000"
-                    }/storage/${facility.image}`}
+                    }/storage/${facility.images[0]}`}
                     alt={facility.name}
                     className="object-cover w-full h-full"
                   />
                 </div>
                 <div className="p-5">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-lg font-bold text-sipil-base line-clamp-2">
-                      {facility.name}
-                    </h3>
+                    <a href={`/fasilitas/${facility.slug}`} className="block">
+                      <h3 className="text-lg font-bold text-sipil-base line-clamp-2">
+                        {facility.name}
+                      </h3>
+                    </a>
                     <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-md">
                       {facility.room}
                     </span>
@@ -351,9 +249,7 @@ export default function FacilityMain() {
               Tidak ada fasilitas ditemukan
             </h3>
             <p className="text-gray-500">
-              {searchQuery
-                ? `Tidak ada fasilitas yang cocok dengan pencarian "${searchQuery}"`
-                : "Tidak ada fasilitas yang tersedia saat ini"}
+              Tidak ada fasilitas yang tersedia saat ini
             </p>
           </div>
         )}

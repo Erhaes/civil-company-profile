@@ -1,79 +1,214 @@
 "use client";
 import { useEffect, useState } from "react";
-import downloadsData from "@/data/download";
 import apiClient from "@/services/apiClient";
 
-const fetchDownloads = async () => {
-  const response = await apiClient.get("/research");
+// Type definitions based on API response
+interface DownloadItem {
+  id: number;
+  title: string;
+  description: string;
+  file: string;
+  deleted_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
 
-  return response.data.data;
+interface ApiResponse {
+  current_page: number;
+  data: DownloadItem[];
+  first_page_url: string;
+  from: number;
+  last_page: number;
+  last_page_url: string;
+  links: Array<{
+    url: string | null;
+    label: string;
+    active: boolean;
+  }>;
+  next_page_url: string | null;
+  path: string;
+  per_page: number;
+  prev_page_url: string | null;
+  to: number;
+  total: number;
+}
+
+const fetchDownloads = async (
+  page: number = 1,
+  perPage: number = 2,
+  search?: string
+) => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    per_page: perPage.toString(),
+  });
+
+  if (search && search.trim() !== "") {
+    params.append("search", search.trim());
+  }
+
+  const response = await apiClient.get(`/downloads?${params.toString()}`);
+  return response.data;
 };
 
 export default function DownloadMain() {
-  // State untuk menyimpan data yang ditampilkan
-  //   const [data, setData] = useState(downloadsData);
-  const [filteredData, setFilteredData] = useState(downloadsData);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState("Semua");
-  const downsData = fetchDownloads();
-  console.log("downloadsData", downsData);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(2); // Match your backend per_page
+  const [apiData, setApiData] = useState<ApiResponse | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Daftar kategori unik dari data
-  const categories = [
-    "Semua",
-    ...Array.from(new Set(downloadsData.map((item) => item.category))),
-  ];
+  // Search and filter states
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>("Semua Kategori");
 
-  // Filter data berdasarkan pencarian dan kategori
+  // Categories for filter (you can modify this based on your needs)
+  const categories = ["Semua Kategori", "Pedoman", "Template", "Panduan"];
+
+  // Fetch data from API
   useEffect(() => {
-    let result = downloadsData;
+    const loadDownloads = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await fetchDownloads(
+          currentPage,
+          itemsPerPage,
+          searchTerm
+        );
+        setApiData(data);
+      } catch (err) {
+        console.error("Failed to fetch downloads:", err);
+        setError("Gagal memuat data download. Silakan coba lagi.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // Filter berdasarkan kategori
-    if (selectedCategory !== "Semua") {
-      result = result.filter((item) => item.category === selectedCategory);
-    }
+    // Debounce search
+    const timeoutId = setTimeout(loadDownloads, 300);
+    return () => clearTimeout(timeoutId);
+  }, [currentPage, itemsPerPage, searchTerm]);
 
-    // Filter berdasarkan pencarian
-    if (searchTerm) {
-      const lowerSearchTerm = searchTerm.toLowerCase();
-      result = result.filter(
-        (item) =>
-          item.title.toLowerCase().includes(lowerSearchTerm) ||
-          item.description.toLowerCase().includes(lowerSearchTerm)
-      );
-    }
-
-    setFilteredData(result);
-    setCurrentPage(1); // Reset halaman saat filter berubah
-  }, [searchTerm, selectedCategory]);
-
-  // Menghitung total halaman
-  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
-
-  // Data yang ditampilkan pada halaman saat ini
-  const currentData = filteredData.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
-
-  // Fungsi untuk mengubah halaman
+  // Handle page change
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Fungsi untuk mengubah jumlah baris per halaman
-  const handleRowsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRowsPerPage(Number(e.target.value));
-    setCurrentPage(1); // Reset ke halaman pertama saat mengubah jumlah baris
+  // Handle items per page change
+  const handleItemsPerPageChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setItemsPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset to first page when changing items per page
   };
+
+  // Handle search
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1); // Reset to first page when searching
+  };
+
+  // Generate page numbers for pagination
+  const generatePageNumbers = () => {
+    if (!apiData) return [];
+
+    const totalPages = apiData.last_page;
+    const current = apiData.current_page;
+    const pages = [];
+
+    // Show maximum 7 pages
+    const maxVisible = 7;
+
+    if (totalPages <= maxVisible) {
+      // Show all pages if total is less than max visible
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      // Always show first page
+      pages.push(1);
+
+      // Calculate start and end of middle pages
+      const start = Math.max(2, current - 2);
+      const end = Math.min(totalPages - 1, current + 2);
+
+      // Add ellipsis after first page if needed
+      if (start > 2) {
+        pages.push("...");
+      }
+
+      // Add middle pages
+      for (let i = start; i <= end; i++) {
+        if (i > 1 && i < totalPages) {
+          pages.push(i);
+        }
+      }
+
+      // Add ellipsis before last page if needed
+      if (end < totalPages - 1) {
+        pages.push("...");
+      }
+
+      // Always show last page
+      if (totalPages > 1) {
+        pages.push(totalPages);
+      }
+    }
+
+    return pages;
+  };
+
+  // Helper function to format download URL
+  const getDownloadUrl = (filePath: string) => {
+    return `${
+      process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000"
+    }/storage/${filePath}`;
+  };
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-light-base text-dark-base section-padding-x">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sipil-base mx-auto mb-4"></div>
+              <p>Memuat data...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-16 bg-light-base text-dark-base section-padding-x">
+        <div className="max-w-screen-xl mx-auto">
+          <div className="text-center text-red-600">
+            <p>{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-4 px-4 py-2 bg-sipil-base text-white rounded-md hover:bg-sipil-secondary"
+            >
+              Coba Lagi
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  const pageNumbers = generatePageNumbers();
+  const downloads = apiData?.data || [];
 
   return (
     <section className="py-16 bg-light-base text-dark-base section-padding-x">
       <div className="max-w-screen-xl mx-auto">
         {/* Filter dan Pencarian */}
-        <div className="bg-white rounded-lg p-4 md:p-6 shadow-md mb-8 small-font-size">
+        {/* <div className="bg-white rounded-lg p-4 md:p-6 shadow-md mb-8 small-font-size">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="flex-1">
               <label
@@ -89,7 +224,7 @@ export default function DownloadMain() {
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sipil-base"
                   placeholder="Cari berdasarkan judul atau deskripsi..."
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={handleSearchChange}
                 />
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <svg
@@ -137,17 +272,24 @@ export default function DownloadMain() {
               <span>Menampilkan </span>
               <select
                 className="mx-2 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sipil-base"
-                value={rowsPerPage}
-                onChange={handleRowsPerPageChange}
+                value={itemsPerPage}
+                onChange={handleItemsPerPageChange}
               >
+                <option value="2">2</option>
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
               </select>
-              <span>dari {filteredData.length} dokumen</span>
+              <span>dari {apiData?.total || 0} dokumen</span>
             </div>
+
+            {apiData && (
+              <div className="text-gray-600">
+                Halaman {apiData.current_page} dari {apiData.last_page}
+              </div>
+            )}
           </div>
-        </div>
+        </div> */}
 
         {/* Tabel Dokumen */}
         <div className="bg-white rounded-lg shadow-md overflow-hidden extra-small-font-size">
@@ -163,27 +305,27 @@ export default function DownloadMain() {
                     Keterangan
                   </th>
                   <th className="px-4 py-2 md:px-6 md:py-3 text-center">
-                    Ukuran
-                  </th>
-                  <th className="px-4 py-2 md:px-6 md:py-3 text-center">
                     Aksi
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {currentData.length > 0 ? (
-                  currentData.map((item, index) => (
+                {downloads.length > 0 ? (
+                  downloads.map((item, index) => (
                     <tr key={item.id} className="hover:bg-gray-50">
                       <td className="px-4 py-2 md:px-6 md:py-3 whitespace-nowrap">
-                        {(currentPage - 1) * rowsPerPage + index + 1}
+                        {((apiData?.current_page || 1) - 1) *
+                          (apiData?.per_page || itemsPerPage) +
+                          index +
+                          1}
                       </td>
                       <td className="px-4 py-2 md:px-6 md:py-3">
                         <div className="font-medium text-sipil-base">
                           {item.title}
                         </div>
                         <div className="text-xs text-gray-500 mt-1">
-                          Kategori: {item.category} | Tanggal:{" "}
-                          {new Date(item.uploadDate).toLocaleDateString(
+                          Tanggal:{" "}
+                          {new Date(item.created_at).toLocaleDateString(
                             "id-ID",
                             { day: "numeric", month: "long", year: "numeric" }
                           )}
@@ -195,15 +337,11 @@ export default function DownloadMain() {
                         </p>
                       </td>
                       <td className="px-4 py-2 md:px-6 md:py-3 text-center whitespace-nowrap">
-                        <span className="text-gray-600 extra-small-font-size">
-                          {item.fileSize}
-                        </span>
-                      </td>
-                      <td className="px-4 py-2 md:px-6 md:py-3 text-center whitespace-nowrap">
                         <a
-                          href={item.fileUrl}
+                          href={getDownloadUrl(item.file)}
                           className="inline-flex items-center gap-1 bg-sipil-base text-white py-2 px-4 rounded-md hover:bg-sipil-secondary transition-colors duration-200"
                           download
+                          target="_blank"
                         >
                           <svg
                             className="w-4 h-4"
@@ -221,7 +359,7 @@ export default function DownloadMain() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center">
+                    <td colSpan={4} className="px-6 py-12 text-center">
                       <div className="flex flex-col items-center justify-center">
                         <svg
                           className="w-12 h-12 text-gray-300 mb-4"
@@ -252,41 +390,52 @@ export default function DownloadMain() {
           </div>
 
           {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="px-4 py-2 md:px-6 md:py-3 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
-              <button
-                className="px-3 py-1 md:px-4 md:py-2 text-sm bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed small-font-size"
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                Sebelumnya
-              </button>
+          {apiData && apiData.last_page > 1 && (
+            <div className="px-4 py-2 md:px-6 md:py-3 bg-gray-50 border-t border-gray-200">
+              <div className="flex items-center justify-between">
+                <button
+                  className="px-3 py-1 md:px-4 md:py-2 text-sm bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed small-font-size"
+                  onClick={() => handlePageChange(apiData.current_page - 1)}
+                  disabled={!apiData.prev_page_url}
+                >
+                  Sebelumnya
+                </button>
 
-              <div className="hidden md:flex items-center gap-1">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (page) => (
+                <div className="flex items-center gap-1">
+                  {pageNumbers.map((page, index) => (
                     <button
-                      key={page}
-                      onClick={() => handlePageChange(page)}
+                      key={index}
+                      onClick={() =>
+                        typeof page === "number" && handlePageChange(page)
+                      }
                       className={`px-3 py-1 text-sm rounded-md ${
-                        currentPage === page
+                        page === apiData.current_page
                           ? "bg-sipil-base text-white"
+                          : page === "..."
+                          ? "bg-transparent text-gray-400 cursor-default"
                           : "bg-white border border-gray-300 hover:bg-gray-50"
                       }`}
+                      disabled={page === "..."}
                     >
                       {page}
                     </button>
-                  )
-                )}
+                  ))}
+                </div>
+
+                <button
+                  className="px-3 py-1 md:px-4 md:py-2 text-sm bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed small-font-size"
+                  onClick={() => handlePageChange(apiData.current_page + 1)}
+                  disabled={!apiData.next_page_url}
+                >
+                  Selanjutnya
+                </button>
               </div>
 
-              <button
-                className="px-3 py-1 md:px-4 md:py-2 text-sm bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed small-font-size"
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                Selanjutnya
-              </button>
+              {/* Pagination info */}
+              <div className="mt-2 text-center text-xs text-gray-500">
+                Menampilkan {apiData.from} - {apiData.to} dari {apiData.total}{" "}
+                data
+              </div>
             </div>
           )}
         </div>

@@ -42,7 +42,7 @@ interface Laboratory {
   name: string;
   room: string;
   description: string;
-  image: string;
+  images: string[];
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
@@ -86,8 +86,6 @@ export default function FacilityDetail() {
       loadFacility();
     }
   }, [slug]);
-
-  console.log("Facility Detail:", facility);
 
   if (loading) {
     return (
@@ -139,7 +137,7 @@ export default function FacilityDetail() {
                   src={`${
                     process.env.NEXT_PUBLIC_API_BASE_URL ||
                     "http://127.0.0.1:8000"
-                  }/storage/${facility.image}`}
+                  }/storage/${facility.images[0]}`}
                   alt={facility.name}
                   className="object-cover w-full h-full"
                 />

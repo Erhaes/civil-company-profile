@@ -159,3 +159,26 @@ export interface News {
   category: NewsCategory;
   user: UserNews;
 }
+
+export interface Package {
+  id: number;
+  name: string;
+  slug: string;
+  price: number;
+  images: string[];
+  description: string;
+  laboratory_id: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface Equipment {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
