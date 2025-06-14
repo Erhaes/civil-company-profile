@@ -26,7 +26,7 @@ export default function Navbar() {
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <a href="#" className="flex items-center gap-2">
-          <img src="/unsoed.png" className="w-12 md:w-16" alt="Unsoed Logo" />
+          <img src="/unsoed.png" className="w-12" alt="Unsoed Logo" />
           <div className="flex flex-col gap-1">
             <span className="normal-font-size font-bold">Teknik Sipil</span>
             <span className="extra-small-font-size">
@@ -59,8 +59,8 @@ export default function Navbar() {
                 key={index}
                 url={route.path}
                 addClass={`${
-                  route.title === "Gabung Discord"
-                    ? "text-light-base gradient-to-r from-blue-Unsoed-base to-blue-Unsoed-secondary bg-gradient-to-br"
+                  route.title === "Reservasi"
+                    ? "text-light-base gradient-to-r from-blue-base to-blue-secondary bg-gradient-to-br"
                     : ""
                 }`}
               >

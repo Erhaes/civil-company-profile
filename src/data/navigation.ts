@@ -32,6 +32,10 @@
       {
           title: "Unduhan",
           path: "/unduhan",
+      },
+      {
+          title: "Reservasi",
+          path: "/",
       }
     ];
     

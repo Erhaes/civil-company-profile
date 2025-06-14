@@ -1,12 +1,21 @@
 "use client";
 
+import apiClient from "@/services/apiClient";
 import { useState, FormEvent } from "react";
 
+type FormData = {
+  name: string;
+  email: string;
+  subject: string;
+  content: string;
+};
+
 export default function Header() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
-    description: "",
+    subject: "",
+    content: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
@@ -26,22 +35,19 @@ export default function Header() {
     setIsSubmitting(true);
 
     // Simulasi pengiriman data (ganti dengan kode integrasi API sebenarnya)
+    // Contoh penggunaan untuk form submission
     try {
-      // Simulasi delay network
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Form submitted:", formData);
-
-      // Reset form
-      setFormData({ name: "", email: "", description: "" });
-      setSubmitMessage(
-        "Pesan Anda berhasil dikirim. Kami akan segera menghubungi Anda."
-      );
-
-      // Hapus pesan sukses setelah 5 detik
-      setTimeout(() => setSubmitMessage(""), 5000);
+      const response = await apiClient.post("/contact", {
+        name: "Muhammad Zaki Dzulfikar",
+        email: "zaki@gmail.com",
+        subject: "Testing Saja",
+        content: "http://127.0.0.1:8000/api/contact",
+      });
+      setSubmitMessage("Pesan berhasil dikirim!");
+      
+      console.log("Success:", response.data);
     } catch (error) {
       console.error("Error submitting form:", error);
-      setSubmitMessage("Terjadi kesalahan. Silakan coba lagi nanti.");
     } finally {
       setIsSubmitting(false);
     }
@@ -91,9 +97,7 @@ export default function Header() {
                   </div>
                   <div>
                     <h4 className="font-semibold">Telepon</h4>
-                    <p className="small-font-size">
-                      +62 281 1234567
-                    </p>
+                    <p className="small-font-size">+62 281 1234567</p>
                   </div>
                 </div>
                 {/* Email */}
@@ -110,16 +114,16 @@ export default function Header() {
                   </div>
                   <div>
                     <h4 className="font-semibold">Email</h4>
-                    <p className="small-font-size">
-                      tekniksipil@unsoed.ac.id
-                    </p>
+                    <p className="small-font-size">tekniksipil@unsoed.ac.id</p>
                   </div>
                 </div>
               </div>
             </div>
             {/* Social Media */}
             <div className="bg-white rounded-lg p-4 md:p-6 shadow-md">
-              <h3 className="font-bold  dark:text-sipil-blue-accent mb-2">Media Sosial</h3>
+              <h3 className="font-bold  dark:text-sipil-blue-accent mb-2">
+                Media Sosial
+              </h3>
               <div className="grid grid-cols-2 gap-4">
                 <a
                   href="https://instagram.com/tekniksipil.unsoed"
@@ -259,15 +263,34 @@ export default function Header() {
 
                 <div>
                   <label
-                    htmlFor="description"
+                    htmlFor="subject"
+                    className="block mb-1 text-gray-700 font-medium"
+                  >
+                    Subjek <span className="text-red-base">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sipil-base"
+                    placeholder="Masukkan subjek pesan Anda"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="content"
                     className="block mb-1 text-gray-700 font-medium"
                   >
                     Pesan <span className="text-red-base">*</span>
                   </label>
                   <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
+                    id="content"
+                    name="content"
+                    value={formData.content}
                     onChange={handleChange}
                     rows={5}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sipil-base"
@@ -326,7 +349,9 @@ export default function Header() {
 
             {/* Google Map */}
             <div className="bg-white rounded-lg p-4 md:p-6 shadow-md">
-              <h3 className="font-bold  dark:text-sipil-blue-accent mb-2">Lokasi Kami</h3>
+              <h3 className="font-bold  dark:text-sipil-blue-accent mb-2">
+                Lokasi Kami
+              </h3>
               <div className="h-80 rounded-lg overflow-hidden">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1978.1648376168541!2d109.33461809235955!3d-7.4287218758772315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6559814ade5b79%3A0xaef1b7bab5cba0f0!2sFakultas%20Teknik%20Universitas%20Jenderal%20Soedirman!5e0!3m2!1sid!2sid!4v1745769709621!5m2!1sid!2sid"

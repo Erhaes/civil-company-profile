@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function ResearchMain() {
   const [filteredData, setFilteredData] = useState(researchesData);
   const [searchTerm, setSearchTerm] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(8);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedYear, setSelectedYear] = useState("Semua");
 
@@ -62,7 +62,7 @@ export default function ResearchMain() {
     <section className="py-16 bg-light-base text-dark-base section-padding-x">
       <div className="max-w-screen-xl mx-auto">
         {/* Filter and Search */}
-        <div className="bg-light-base rounded-lg p-4 md:p-6 shadow-md mb-8 small-font-size">
+        {/* <div className="bg-light-base rounded-lg p-4 md:p-6 shadow-md mb-8 small-font-size">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="flex-1">
               <label
@@ -136,7 +136,7 @@ export default function ResearchMain() {
               <span>dari {filteredData.length} penelitian</span>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Research Table */}
         <div className="bg-light-base rounded-lg shadow-md overflow-hidden extra-small-font-size">

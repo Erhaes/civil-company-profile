@@ -395,9 +395,11 @@ export default function FacilityDetail() {
                             {test.is_active ? "Tersedia" : "Tidak Tersedia"}
                           </span>
                         </div>
-                        <h3 className="text-xl font-bold text-dark-base mb-2 group-hover:text-sipil-base transition-colors">
-                          {test.name}
-                        </h3>
+                        <a href={`/pengujian/${test.slug}`}>
+                          <h3 className="text-xl font-bold text-dark-base mb-2 group-hover:text-sipil-base transition-colors">
+                            {test.name}
+                          </h3>
+                        </a>
                       </div>
                     </div>
 
