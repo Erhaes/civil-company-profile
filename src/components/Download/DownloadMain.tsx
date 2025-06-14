@@ -53,18 +53,19 @@ const fetchDownloads = async (
 
 export default function DownloadMain() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(2); // Match your backend per_page
+  // const [itemsPerPage, setItemsPerPage] = useState<number>(2); // Match your backend per_page
+  const itemsPerPage = 2; // Fixed for simplicity, can be made dynamic if needed
   const [apiData, setApiData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   // Search and filter states
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [selectedCategory, setSelectedCategory] =
-    useState<string>("Semua Kategori");
+  // const [searchTerm, setSearchTerm] = useState<string>("");
+  // const [selectedCategory, setSelectedCategory] =
+  //   useState<string>("Semua Kategori");
 
   // Categories for filter (you can modify this based on your needs)
-  const categories = ["Semua Kategori", "Pedoman", "Template", "Panduan"];
+  // const categories = ["Semua Kategori", "Pedoman", "Template", "Panduan"];
 
   // Fetch data from API
   useEffect(() => {
@@ -75,7 +76,7 @@ export default function DownloadMain() {
         const data = await fetchDownloads(
           currentPage,
           itemsPerPage,
-          searchTerm
+          // searchTerm
         );
         setApiData(data);
       } catch (err) {
@@ -89,7 +90,7 @@ export default function DownloadMain() {
     // Debounce search
     const timeoutId = setTimeout(loadDownloads, 300);
     return () => clearTimeout(timeoutId);
-  }, [currentPage, itemsPerPage, searchTerm]);
+  }, [currentPage, itemsPerPage /*, searchTerm, selectedCategory*/]);
 
   // Handle page change
   const handlePageChange = (page: number) => {
@@ -98,18 +99,18 @@ export default function DownloadMain() {
   };
 
   // Handle items per page change
-  const handleItemsPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setItemsPerPage(Number(e.target.value));
-    setCurrentPage(1); // Reset to first page when changing items per page
-  };
+  // const handleItemsPerPageChange = (
+  //   e: React.ChangeEvent<HTMLSelectElement>
+  // ) => {
+  //   setItemsPerPage(Number(e.target.value));
+  //   setCurrentPage(1); // Reset to first page when changing items per page
+  // };
 
   // Handle search
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    setCurrentPage(1); // Reset to first page when searching
-  };
+  // const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearchTerm(e.target.value);
+  //   setCurrentPage(1); // Reset to first page when searching
+  // };
 
   // Generate page numbers for pagination
   const generatePageNumbers = () => {

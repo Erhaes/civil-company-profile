@@ -2,7 +2,7 @@ export default function HomepageFacilities() {
   const cards = [
     {
       title: "Tenaga Berpengalaman",
-      desc: "Pengujian dilakukan oleh tenaga ahli yang berpengalaman dan profesional dalam bidangnya.",
+      desc: "Pengujian dilakukan oleh teknisi yang berpengalaman dan profesional dalam bidangnya.",
       icon: (
         <svg
           fill="currentColor"

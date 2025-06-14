@@ -4,36 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import apiClient from "@/services/apiClient";
 import { useParams } from "next/navigation";
-
-interface Test {
-  id: number;
-  name: string;
-  slug: string;
-  price: number;
-  description: string;
-  images: string[];
-  minimum_unit: number;
-  daily_slot: number;
-  is_active: boolean;
-  category_id: number;
-  laboratory_id: number;
-  created_at: string;
-  updated_at: string;
-  deleted_at: string | null;
-}
-
-interface Package {
-  id: number;
-  name: string;
-  slug: string;
-  price: number;
-  images: string[];
-  description: string;
-  laboratory_id: number;
-  created_at: string;
-  updated_at: string;
-  deleted_at: string | null;
-}
+import { Equipment, Package, Test } from "@/types";
 
 interface Laboratory {
   id: number;
@@ -46,7 +17,7 @@ interface Laboratory {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
-  equipments: any[];
+  equipments: Equipment[];
   packages: Package[];
   tests: Test[];
 }
@@ -63,7 +34,7 @@ export default function FacilityDetail() {
       const response = await apiClient.get(`/labs/${slug}`);
       return response.data.data;
     } catch (error) {
-      throw new Error("Failed to fetch facility data");
+      throw new Error("Failed to fetch facility data: " + error);
     }
   };
 
@@ -428,7 +399,7 @@ export default function FacilityDetail() {
                           </span>
                         </div>
                         <span className="text-lg font-bold text-sipil-base">
-                          Rp {test.price.toLocaleString("id-ID")}
+                          Rp {test.price?.toLocaleString("id-ID")}
                         </span>
                       </div>
 

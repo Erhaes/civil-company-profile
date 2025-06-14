@@ -129,11 +129,13 @@ export interface TestUnit {
 export interface Test {
   id: number;
   name: string;
+  slug: string;
   description: string;
   images: TestImage[];
   minimum_unit: number;
   daily_slot: number;
   is_active: boolean;
+  price?: number;
   laboratory: Facility;
   unit: TestUnit;
 }

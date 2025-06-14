@@ -4,6 +4,7 @@ const testsData: Test[] = [
   {
     id: 1,
     name: "Uji Kuat Tekan Beton",
+    slug: "uji-kuat-tekan-beton",
     description: "Pengujian untuk menentukan kekuatan tekan beton dengan menggunakan mesin uji tekan. Sampel beton berbentuk silinder atau kubus diletakkan di mesin dan diberi beban sampai hancur.",
     images: [
       { id: 1, image: "/images/tests/uji-tekan-beton-1.jpg" },
@@ -39,6 +40,7 @@ const testsData: Test[] = [
   {
     id: 2,
     name: "Uji CBR (California Bearing Ratio)",
+    slug: "uji-cbr",
     description: "Pengujian untuk mengevaluasi kekuatan tanah dasar untuk pembangunan jalan dan landasan pacu. Sampel tanah dipadatkan dan diuji penetrasinya.",
     images: [
       { id: 3, image: "/images/tests/uji-cbr-1.jpg" },
@@ -74,6 +76,7 @@ const testsData: Test[] = [
   {
     id: 3,
     name: "Uji Tarik Baja",
+    slug: "uji-tarik-baja",
     description: "Pengujian untuk menentukan kekuatan tarik, elastisitas, dan keuletan baja tulangan dengan mesin uji tarik universal.",
     images: [
       { id: 5, image: "/images/tests/uji-tarik-baja-1.jpg" },
@@ -109,6 +112,7 @@ const testsData: Test[] = [
   {
     id: 4,
     name: "Uji Dinamika Struktur",
+    slug: "uji-dinamika-struktur",
     description: "Pengujian untuk mengevaluasi respon struktur terhadap beban dinamis seperti gempa bumi atau getaran mekanis.",
     images: [
       { id: 7, image: "/images/tests/uji-dinamika-struktur-1.jpg" },
@@ -144,6 +148,7 @@ const testsData: Test[] = [
   {
     id: 5,
     name: "Uji Permeabilitas Tanah",
+    slug: "uji-permeabilitas-tanah",
     description: "Pengujian untuk mengukur kemampuan tanah dalam meloloskan air, penting untuk desain drainase dan struktur tanah.",
     images: [
       { id: 9, image: "/images/tests/uji-permeabilitas-1.jpg" },
@@ -179,6 +184,7 @@ const testsData: Test[] = [
   {
     id: 6,
     name: "Uji Kualitas Air",
+    slug: "uji-kualitas-air",
     description: "Pengujian parameter fisik, kimia, dan biologis air untuk menilai kesesuaiannya untuk keperluan konstruksi atau lingkungan.",
     images: [
       { id: 11, image: "/images/tests/uji-air-1.jpg" },
@@ -214,6 +220,7 @@ const testsData: Test[] = [
   {
     id: 7,
     name: "Uji Gradasi Agregat",
+    slug: "uji-gradasi-agregat",
     description: "Pengujian untuk menentukan distribusi ukuran butiran agregat yang digunakan dalam campuran beton atau aspal.",
     images: [
       { id: 13, image: "/images/tests/uji-gradasi-1.jpg" },
@@ -249,6 +256,7 @@ const testsData: Test[] = [
   {
     id: 8,
     name: "Uji Konsolidasi Tanah",
+    slug: "uji-konsolidasi-tanah",
     description: "Pengujian untuk menentukan laju dan besarnya penurunan tanah ketika dibebani, penting untuk perencanaan pondasi bangunan.",
     images: [
       { id: 15, image: "/images/tests/uji-konsolidasi-1.jpg" },

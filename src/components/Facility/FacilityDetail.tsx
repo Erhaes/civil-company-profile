@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import apiClient from "@/services/apiClient";
+import { Equipment, Package, Test } from "@/types";
 
 interface Laboratory {
   id: number;
@@ -16,9 +17,9 @@ interface Laboratory {
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
-  equipments: any[];
-  packages: any[];
-  tests: any[];
+  equipments: Equipment[];
+  packages: Package[];
+  tests: Test[];
 }
 
 interface FacilityDetailProps {
@@ -35,7 +36,7 @@ export default function FacilityDetail({ slug }: FacilityDetailProps) {
       const response = await apiClient.get(`/labs/${slug}`);
       return response.data;
     } catch (error) {
-      throw new Error('Failed to fetch facility data');
+      throw new Error('Failed to fetch facility data' + (error instanceof Error ? error.message : ''));
     }
   };
 
@@ -177,7 +178,7 @@ export default function FacilityDetail({ slug }: FacilityDetailProps) {
               {facility.tests.slice(0, 3).map((test) => (
                 <div key={test.id} className="flex justify-between items-center p-2 bg-white bg-opacity-10 rounded">
                   <span className="text-sm">{test.name}</span>
-                  <span className="text-xs text-blue-300">Rp {test.price.toLocaleString('id-ID')}</span>
+                  <span className="text-xs text-blue-300">Rp {test.price?.toLocaleString('id-ID')}</span>
                 </div>
               ))}
               {facility.tests.length > 3 && (

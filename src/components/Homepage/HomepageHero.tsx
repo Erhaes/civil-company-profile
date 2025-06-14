@@ -30,10 +30,10 @@ export default function HomepageHero() {
             <p className="mb-4 md:mb-8">
               Laboratorium Teknik Sipil Unsoed berfungsi sebagai pusat
               pembelajaran praktis dan eksperimental yang dipergunakan oleh
-              mahasiswa Fakultas Teknik Unsoed dan pelayanan untuk mitra dari
+              civitas akademika dan pelayanan untuk mitra dari
               luar Laboratorium Teknik Sipil Unsoed yang mencakup bidang
-              Struktur dan Bahan Bangunan, Mekanika Tanah dan Hidraulika,
-              Transportasi, Mekanika Keairan dan Teknik Lingkungan.
+              <span className="bg-sipil-base text-light-base">Struktur dan Bahan Bangunan, Mekanika Tanah dan Hidraulika,
+              Transportasi, Mekanika Keairan dan Teknik Lingkungan.</span>
             </p>
             <div className="flex flex-wrap gap-2">
               <a

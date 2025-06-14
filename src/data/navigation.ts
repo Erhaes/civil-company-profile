@@ -18,10 +18,6 @@
         path: "/pengujian",
       },
       {
-        title: "Penelitian",
-        path: "/penelitian",
-      },
-      {
         title: "Berita",
         path: "/berita",
       },

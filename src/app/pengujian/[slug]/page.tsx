@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
@@ -54,7 +53,7 @@ export default function TestDetail() {
       const response = await apiClient.get(`/tests/${slug}`);
       return response.data.data;
     } catch (error) {
-      throw new Error("Failed to fetch test data");
+      throw new Error("Failed to fetch test data" + error);
     }
   };
 

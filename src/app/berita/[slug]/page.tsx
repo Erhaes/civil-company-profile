@@ -330,7 +330,7 @@ export default function NewsDetail() {
           </article>
 
           {/* Author Bio */}
-          <div className="mt-8 bg-white rounded-lg shadow-lg p-6 md:p-8">
+          {/* <div className="mt-8 bg-white rounded-lg shadow-lg p-6 md:p-8">
             <h3 className="text-xl font-bold mb-4">Tentang Penulis</h3>
             <div className="flex items-start gap-4">
               <div className="relative w-16 h-16 flex-shrink-0">
@@ -350,7 +350,7 @@ export default function NewsDetail() {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </main>

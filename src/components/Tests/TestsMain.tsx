@@ -80,17 +80,23 @@ const fetchTests = async (
 };
 
 export default function TestsMain() {
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [selectedLab, setSelectedLab] = useState<string>("all");
-  const [showActiveOnly, setShowActiveOnly] = useState<boolean>(true);
+  // const [searchQuery, setSearchQuery] = useState<string>("");
+  const searchQuery: string = ""; // Explicit typing for consistency
+  // const [selectedLab, setSelectedLab] = useState<string>("all");
+  const selectedLab: string = "all"; // Explicit typing for consistency
+  // const [showActiveOnly, setShowActiveOnly] = useState<boolean>(true);
+  const showActiveOnly: boolean = true; // Explicit typing for consistency
   const [apiData, setApiData] = useState<ApiResponse | null>(null);
   const [laboratories, setLaboratories] = useState<
     Array<{ id: string; name: string }>
   >([{ id: "all", name: "Semua Laboratorium" }]);
+  console.log("Initial laboratories:", laboratories);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  console.log("Initial laboratories:", dropdownOpen);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(8);
+  // const [itemsPerPage, setItemsPerPage] = useState<number>(8);
+  const itemsPerPage: number = 8; // Fixed items per page for simplicity
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(
@@ -202,12 +208,12 @@ export default function TestsMain() {
   };
 
   // Handle items per page change
-  const handleItemsPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setItemsPerPage(Number(e.target.value));
-    setCurrentPage(1); // Reset to first page
-  };
+  // const handleItemsPerPageChange = (
+  //   e: React.ChangeEvent<HTMLSelectElement>
+  // ) => {
+  //   setItemsPerPage(Number(e.target.value));
+  //   setCurrentPage(1); // Reset to first page
+  // };
 
   // Generate page numbers for pagination
   const generatePageNumbers = () => {
@@ -238,9 +244,9 @@ export default function TestsMain() {
   };
 
   // Get selected lab name for display
-  const selectedLabName =
-    laboratories.find((lab) => lab.id === selectedLab)?.name ||
-    "Semua Laboratorium";
+  // const selectedLabName =
+  //   laboratories.find((lab) => lab.id === selectedLab)?.name ||
+  //   "Semua Laboratorium";
 
   const pageNumbers = generatePageNumbers();
   const tests = apiData?.data || [];
