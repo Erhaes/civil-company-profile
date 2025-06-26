@@ -246,7 +246,7 @@ export default function ProfileMain() {
                 : "border-transparent text-gray-500 hover:text-gray-700"
             }`}
           >
-            Sertifikasi & Akreditasi
+            Standar Laboratorium
           </button>
         </div>
 
@@ -264,9 +264,10 @@ export default function ProfileMain() {
                 </h3> */}
                 <div className="bg-gray-100 p-4 rounded flex justify-center">
                   <div className="w-full max-w-3xl h-80 bg-white border rounded-lg flex items-center justify-center">
-                    <p className="text-gray-500">
+                    {/* <p className="text-gray-500">
                       Diagram Struktur Organisasi Teknik Sipil UNSOED
-                    </p>
+                    </p> */}
+                    <img src="/images/staff/struktur-organisasi.png" className="w-full h-full" alt="Struktur Organisasi Laboratorium Teknik Sipil Unsoed" />
                   </div>
                 </div>
               </div>

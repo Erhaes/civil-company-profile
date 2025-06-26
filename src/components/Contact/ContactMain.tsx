@@ -78,7 +78,7 @@ export default function Header() {
                   <div>
                     <h4 className="font-semibold">Alamat</h4>
                     <p className="small-font-size">
-                      Fakultas Teknik, Universitas Jenderal Soedirman Jl. Mayjen
+                      Gedung D Lt. 1 Fakultas Teknik, Universitas Jenderal Soedirman Jl. Mayjen
                       Sungkono KM 5, Blater Purbalingga, Jawa Tengah 53371
                     </p>
                   </div>
@@ -97,7 +97,7 @@ export default function Header() {
                   </div>
                   <div>
                     <h4 className="font-semibold">Telepon</h4>
-                    <p className="small-font-size">+62 281 1234567</p>
+                    <p className="small-font-size">0813-9313-3408</p>
                   </div>
                 </div>
                 {/* Email */}
@@ -114,7 +114,7 @@ export default function Header() {
                   </div>
                   <div>
                     <h4 className="font-semibold">Email</h4>
-                    <p className="small-font-size">tekniksipil@unsoed.ac.id</p>
+                    <p className="small-font-size">laboratoriumsipil.unsoed@gmail.com</p>
                   </div>
                 </div>
               </div>
@@ -159,7 +159,7 @@ export default function Header() {
                   <span className="font-medium">Teknik Sipil</span>
                 </a>
 
-                <a
+                {/* <a
                   href="https://linkedin.com/tekniksipil_unsoed"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -174,7 +174,7 @@ export default function Header() {
                     <path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
                   </svg>
                   <span className="font-medium">Teknik Sipil</span>
-                </a>
+                </a> */}
 
                 <a
                   href="https://youtube.com/tekniksipil_unsoed"
@@ -354,7 +354,7 @@ export default function Header() {
               </h3>
               <div className="h-80 rounded-lg overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1978.1648376168541!2d109.33461809235955!3d-7.4287218758772315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6559814ade5b79%3A0xaef1b7bab5cba0f0!2sFakultas%20Teknik%20Universitas%20Jenderal%20Soedirman!5e0!3m2!1sid!2sid!4v1745769709621!5m2!1sid!2sid"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.330504287398!2d109.33501537500132!3d-7.428629792582002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655986a5294e97%3A0x6ed179e2743fcd16!2sGedung%20Laboratorium%20Bersama%20FT%20UNSOED!5e0!3m2!1sid!2sid!4v1750268049029!5m2!1sid!2sid"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

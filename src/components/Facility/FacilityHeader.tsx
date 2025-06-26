@@ -15,10 +15,10 @@ export default function FacilityHeader() {
             <p className="extra-small-font-size">Berbagai Fasilitias di Teknik Sipil Unsoed</p>
           </span>
           <h1 className="font-bold mb-1">
-            Fasilitas Program Studi Teknik Sipil Unsoed
+            Fasilitas Laboratorium Studi Teknik Sipil Unsoed
           </h1>
           <p>
-            Program Studi Teknik Sipil Unsoed memiliki berbagai fasilitas yang
+            Laboratorium Studi Teknik Sipil Unsoed memiliki berbagai fasilitas yang
             mendukung kegiatan akademik dan penelitian.
           </p>
         </div>

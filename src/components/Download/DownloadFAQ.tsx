@@ -71,8 +71,7 @@ export default function DownloadFAQ() {
           <h3 className="font-bold text-sipil-base mb-4">Catatan Penting</h3>
           <ul className="list-disc list-outside pl-4 md:pl-6 space-y-2 text-gray-600 small-font-size">
             <li>
-              Semua dokumen yang tersedia hanya untuk keperluan akademik dan
-              tidak untuk disebarluaskan.
+              Dokumen yang dapat diunduh pada laman ini merupakan dokumen terbuka yang dapat diakses oleh umum.
             </li>
             <li>
               Pastikan Anda memiliki aplikasi yang sesuai untuk membuka file
@@ -81,12 +80,12 @@ export default function DownloadFAQ() {
             <li>
               Jika Anda mengalami masalah dalam mengunduh dokumen, silakan
               hubungi admin di{" "}
-              <span className="text-sipil-base">teksip@unsoed.ac.id</span>.
+              <span className="text-sipil-base">laboratoriumsipi.unsoed@gmail.com</span>.
             </li>
-            <li>
+            {/* <li>
               Dokumen resmi seperti surat keterangan, transkrip, dan ijazah
               tidak tersedia untuk diunduh dari website ini.
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

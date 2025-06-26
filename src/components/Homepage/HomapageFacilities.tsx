@@ -1,7 +1,7 @@
 export default function HomepageFacilities() {
   const cards = [
     {
-      title: "Tenaga Berpengalaman",
+      title: "Tenaga Profesional dan Berpengalaman",
       desc: "Pengujian dilakukan oleh teknisi yang berpengalaman dan profesional dalam bidangnya.",
       icon: (
         <svg
@@ -69,8 +69,7 @@ export default function HomepageFacilities() {
             Fasilitas
           </p>
           <h2 className="font-bold mb-2">
-            Berbagai Fasilitas Modern untuk Mendukung Kegiatan Belajar dan
-            Penelitian.
+            Berbagai Fasilitas Modern untuk Mendukung Penelitian dan Pengujian Anda.
           </h2>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

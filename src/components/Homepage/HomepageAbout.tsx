@@ -16,10 +16,10 @@ export default function HomepageAbout() {
             >
               <path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z" />
             </svg>
-            <h2 className="extra-small-font-size">Tentang Teknik Sipil</h2>
+            <h2 className="extra-small-font-size">Visi dan Misi</h2>
           </span>
           <h2 className="font-bold">
-            Keunggulan Program Studi Teknik Sipil Unsoed
+            Visi dan Misi Laboratorium Teknik Sipil Unsoed
           </h2>
           <p className="max-w-3xl mx-auto">
             Program Studi Teknik Sipil Universitas Jenderal Soedirman didirikan
@@ -33,7 +33,8 @@ export default function HomepageAbout() {
           {/* Left Column - Image */}
           <div className="relative rounded-lg overflow-hidden h-full">
             <img
-              src="/images/backgrounds/ufuk-unsoed.webp"
+              // src="/images/backgrounds/ufuk-unsoed.webp"
+              src="/images/backgrounds/lobby.jpeg"
               alt="Gedung Teknik Unsoed"
               className="rounded-lg shadow-lg w-full h-full object-cover"
             />

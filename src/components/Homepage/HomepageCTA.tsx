@@ -15,16 +15,16 @@ export default function HomepageCTA() {
           </p>
           <div className="flex justify-center gap-4">
             <a
-              href="https://discord.gg/W4XyRAmPSD"
+              href="http://localhost:8000"
               className="text-light-base bg-gradient-to-br from-sipil-base to-sipil-secondary px-4 py-2 md:px-6 md:py-3 rounded-xl font-semibold transition-all duration-300 shadow hover:shadow-lg"
             >
-              Kunjungi Laboratorium
+              Reservasi Pengujian
             </a>
             <a
-              href="https://www.facebook.com/groups/programmerhandal"
+              href="/profil"
               className="px-4 py-2 md:px-6 md:py-3 border border-sipil-base rounded-xl font-semibold transition-all duration-300 text-sipil-base hover:bg-sipil-base hover:text-white"
             >
-              Daftar Sekarang
+              Profil Laboratorium
             </a>
           </div>
         </div>

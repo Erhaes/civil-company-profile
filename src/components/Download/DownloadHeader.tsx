@@ -14,11 +14,11 @@ export default function DownloadHeader() {
             </svg>
             <p className="extra-small-font-size">Pusat Unduhan</p>
           </span>
-          <h1 className="font-bold mb-6">Unduhan Dokumen Teknik Sipil</h1>
+          <h1 className="font-bold mb-6">Unduhan Dokumen Laboratorium Teknik Sipil</h1>
           <p className="mb-6">
             Akses dan unduh dokumen resmi, formulir, template, pedoman
             praktikum, dan berbagai materi pembelajaran yang relevan untuk
-            mahasiswa Teknik Sipil Unsoed.
+            mahasiswa Teknik Sipil Unsoed dan masyarakat umum.
           </p>
         </div>
       </div>

@@ -27,17 +27,17 @@ export default function HomepageHero() {
             <h1 className="font-bold mb-2 md:text-left">
               Membangun Masa Depan Infrastruktur yang Berkelanjutan
             </h1>
-            <p className="mb-4 md:mb-8">
+            <p className="mb-4 mr-5 md:mb-8 mr-0 text-justify">
               Laboratorium Teknik Sipil Unsoed berfungsi sebagai pusat
               pembelajaran praktis dan eksperimental yang dipergunakan oleh
               civitas akademika dan pelayanan untuk mitra dari
-              luar Laboratorium Teknik Sipil Unsoed yang mencakup bidang
-              <span className="bg-sipil-base text-light-base">Struktur dan Bahan Bangunan, Mekanika Tanah dan Hidraulika,
+              luar Laboratorium Teknik Sipil Unsoed yang mencakup &nbsp;
+              <span className="text-dark-1000 font-bold">bidang Struktur dan Bahan Bangunan, Mekanika Tanah dan Hidraulika,
               Transportasi, Mekanika Keairan dan Teknik Lingkungan.</span>
             </p>
             <div className="flex flex-wrap gap-2">
               <a
-                href="#"
+                href="http://localhost:8000"
                 className="rounded-md bg-blue-base text-light-base py-2 px-4 font-semibold hover:bg-blue-quaternary hover:text-blue-base transition duration-300 small-font-size"
               >
                 Reservasi Laboratorium
@@ -55,8 +55,8 @@ export default function HomepageHero() {
         </div>
         <div className="hero-animate-2">
           <img
-            src="/images/backgrounds/gedung-ft.jpg"
-            alt="Gedung Fakultas Teknik Unsoed"
+            src="/images/backgrounds/gedung-lab.jpg"
+            alt="Gedung D Laboratorium Fakultas Teknik Unsoed"
             className="xl:max-w-xl rounded-lg"
           />
         </div>

@@ -2,7 +2,7 @@ import FacilityHeader from "@/components/Facility/FacilityHeader";
 import FacilityMain from "@/components/Facility/FacilityMain";
 
 export const metadata = {
-  title: "Fasilitas | Teknik Sipil Unsoed",
+  title: "Fasilitas | Lab. Teknik Sipil Unsoed",
 };
 
 // Komponen utama halaman fasilitas
