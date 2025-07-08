@@ -39,7 +39,7 @@ export default function HomepageAbout() {
               className="rounded-lg shadow-lg w-full h-full object-cover"
             />
             <div className="absolute top-4 left-4 bg-sipil-base text-light-base py-1 px-3 rounded-md shadow-md small-font-size font-medium">
-              Didirikan Tahun 1963
+              Didirikan Tahun 2000
             </div>
           </div>
 

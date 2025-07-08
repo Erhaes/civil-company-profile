@@ -12,7 +12,7 @@ export default function Footer() {
             <a href="#" className="mb-4 flex gap-4 items-center">
               <img src="/unsoed.png" className="w-16" alt="Unsoed Logo" />
               <div className="flex flex-col">
-                <span className="big-font-size">Teknik Sipil</span>
+                <span className="big-font-size">Lab. Teknik Sipil</span>
                 <small>Universitas Jenderal Soedirman</small>
               </div>
             </a>
@@ -78,13 +78,13 @@ export default function Footer() {
           <div className="max-w-sm lg:max-w-sm">
             <h5 className="font-semibold mb-2">Alamat</h5>
             <small>
-              Jl. Raya Mayjen Sungkono No.KM 5, Dusun 2, Blater, Kec. Kalimanah,
+              Gedung D Lt. 1 Jl. Raya Mayjen Sungkono No.KM 5, Dusun 2, Blater, Kec. Kalimanah,
               Kabupaten Purbalingga, Jawa Tengah 53371
             </small>
           </div>
         </div>
         <p className="text-xs text-center text-gray-700 dark:text-gray-400">
-          © 2025 Teknik Sipil - Fakultas Teknik - Universitas Jenderal Soedirman. All rights reserved.
+          © 2025 Lab. Teknik Sipil - Fakultas Teknik - Universitas Jenderal Soedirman. All rights reserved.
         </p>
       </div>
     </footer>
