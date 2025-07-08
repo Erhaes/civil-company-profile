@@ -6,7 +6,7 @@ import HomepageCTA from "@/components/Homepage/HomepageCTA";
 import HomepageAccreditation from "@/components/Homepage/HomepageAccreditation";
 
 export const metadata = {
-  title: "Beranda | Teknik Sipil Unsoed",
+  title: "Beranda | Lab. Teknik Sipil Unsoed",
 };
 
 export default function Home() {

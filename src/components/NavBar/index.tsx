@@ -28,7 +28,7 @@ export default function Navbar() {
         <a href="#" className="flex items-center gap-2">
           <img src="/unsoed.png" className="w-12" alt="Unsoed Logo" />
           <div className="flex flex-col gap-1">
-            <span className="normal-font-size font-bold">Teknik Sipil</span>
+            <span className="normal-font-size font-bold">Lab. Teknik Sipil</span>
             <span className="extra-small-font-size">
               Universitas Jenderal Soedirman
             </span>

@@ -2,7 +2,7 @@ import TestsHeader from "@/components/Tests/TestsHeader";
 import TestsMain from "@/components/Tests/TestsMain";
 
 export const metadata = {
-  title: "Pengujian | Teknik Sipil Unsoed",
+  title: "Pengujian | Lab. Teknik Sipil Unsoed",
 };
 
 // Komponen utama halaman pengujian
