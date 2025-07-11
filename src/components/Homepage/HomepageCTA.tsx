@@ -7,11 +7,11 @@ export default function HomepageCTA() {
       <div className="mx-auto max-w-screen-xl">
         <div className="text-center mb-8 max-w-3xl mx-auto p-4 md:p-8 lg:p-12 xl:p-16 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 shadow-md">
           <h2 className="font-bold mb-2 text-2xl md:text-3xl lg:text-4xl">
-            Siap Bergabung dengan Teknik Sipil UNSOED?
+            Butuh Hasil Pengujian yang Akurat dan Terpercaya?
           </h2>
           <p className="text-gray-500 mb-6 md:text-lg">
-            Mari bergabung dengan komunitas Teknik Sipil UNSOE dan wujudkan
-            impianmu menjadi ahli di bidang teknik sipil bersama kami!
+            Laboratorium Teknik Sipil UNSOED siap membantu proyek Anda dengan layanan pengujian yang lengkap dan hasil pengujian yang akurat.
+             Lihat daftar pengujian kami dan lakukan reservasi dengan mudah.
           </p>
           <div className="flex justify-center gap-4">
             <a

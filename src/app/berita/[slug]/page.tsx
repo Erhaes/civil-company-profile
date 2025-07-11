@@ -249,8 +249,10 @@ export default function NewsDetail() {
 
             {/* Content */}
             <div className="p-6 md:p-8">
-              <div className="prose prose-lg max-w-none">
-                {formatContent(news.content)}
+              <div className="prose prose-lg max-w-none mb-4 text-gray-700 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: news.content }}
+              >
+                {/* {formatContent(news.content)} */}
               </div>
 
               {/* Tags/Actions */}

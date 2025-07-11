@@ -15,12 +15,11 @@ export default function ProfileHeader() {
             <p className="extra-small-font-size">Profil</p>
           </span>
           <h1 className="font-bold mb-1">
-            Profil Teknik Sipil Unsoed
+            Profil Laboratorium Teknik Sipil Unsoed
           </h1>
           <p>
-            Program Studi Teknik Sipil Unsoed berkomitmen untuk memberikan
-            pendidikan berkualitas dan menghasilkan lulusan yang kompeten di
-            bidang teknik sipil.
+            Laboratorium Teknik Sipil Universitas Jenderal Soedirman (Unsoed) menyediakan layanan pengujian yang andal 
+            dan akurat untuk mendukung kebutuhan akademisi serta mitra industri.
           </p>
         </div>
       </div>
