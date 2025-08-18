@@ -36,10 +36,22 @@ export interface Laboratorium {
   foto: string;
 }
 
-export interface StrukturJabatan {
-  jabatan: string;
-  nama: string;
-  foto: string;
+// export interface StrukturJabatan {
+//   jabatan: string;
+//   nama: string;
+//   foto: string;
+// }
+export interface Position {
+  id: number;
+  name: string;
+}
+
+export interface TeamMember {
+  id: number;
+  name: string;
+  photo: string | null;
+  position_id: number;
+  position: Position;
 }
 
 export interface Prestasi {

@@ -151,19 +151,18 @@ export default function HomepageTestimonial() {
         >
             <div className="mx-auto max-w-screen-xl flex flex-col lg:flex-row justify-between gap-8">
                 <div className="max-w-xl">
-                    <p className="text-sipil-base">Testimoni Alumni</p>
+                    <p className="text-sipil-base">Testimoni Pengujian</p>
                     <h2 className="font-bold mb-2">
-                        Apa Kata Mereka yang Pernah Menjadi Bagian dari Teknik Sipil Unsoed?
+                        Apa Kata Mereka?
                     </h2>
                     <p className="text-gray-500 dark:text-gray-300 mb-4">
-                        Teknik Sipil Unsoed memberikan pengalaman belajar yang luar biasa, 
-                        membekali mahasiswa dengan ilmu dan keterampilan yang relevan di dunia kerja.
+                        Laboratorium Teknik Sipil Unsoed selalu berupaya memberikan hasil pengujian yang akurat dan didukung tim ahli yang siap menjadi mitra kesuksesan teknis Anda.
                     </p>
                     <a
                         href="#"
                         className="text-light-base gradient-to-r from-sipil-base to-sipil-secondary bg-gradient-to-br px-4 py-2 md:px-6 md:py-3 rounded-xl font-semibold small-font-size"
                     >
-                        Pelajari Lebih Lanjut
+                        Reservasi Sekarang Juga!
                     </a>
                 </div>
                 

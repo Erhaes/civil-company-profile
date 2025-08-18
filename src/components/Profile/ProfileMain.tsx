@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import apiClient from "@/services/apiClient";
+import { TeamMember } from "@/types";
 
 // Type definitions for Research
 interface ResearchItem {
@@ -59,6 +60,11 @@ const fetchResearch = async (
 export default function ProfileMain() {
   const [activeTab, setActiveTab] = useState("struktur");
 
+  // State untuk data pejabat struktural dari API
+  const [team, setTeam] = useState<TeamMember[]>([]);
+  const [teamLoading, setTeamLoading] = useState<boolean>(true);
+  const [teamError, setTeamError] = useState<string | null>(null);
+
   // Research states
   const [currentPage, setCurrentPage] = useState<number>(1);
   // const [itemsPerPage, setItemsPerPage] = useState<number>(8);
@@ -71,14 +77,14 @@ export default function ProfileMain() {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   // Data dummy untuk struktur organisasi
-  const strukturOrganisasi = [
-    { nama: "Dr. Ir. Ahmad Susanto, M.T.", jabatan: "Ketua Program Studi" },
-    { nama: "Dr. Ir. Budi Santoso, M.T.", jabatan: "Sekretaris Program Studi" },
-    { nama: "Dr. Ir. Citra Dewi, M.T.", jabatan: "Koordinator Akademik" },
-    { nama: "Ir. Diana Sari, M.T.", jabatan: "Koordinator Laboratorium" },
-    { nama: "Dr. Ir. Eko Prasetyo, M.T.", jabatan: "Koordinator Penelitian" },
-    { nama: "Ir. Fauzi Rahman, M.T.", jabatan: "Koordinator Pengabdian" },
-  ];
+  // const strukturOrganisasi = [
+  //   { nama: "Dr. Ir. Ahmad Susanto, M.T.", jabatan: "Ketua Program Studi" },
+  //   { nama: "Dr. Ir. Budi Santoso, M.T.", jabatan: "Sekretaris Program Studi" },
+  //   { nama: "Dr. Ir. Citra Dewi, M.T.", jabatan: "Koordinator Akademik" },
+  //   { nama: "Ir. Diana Sari, M.T.", jabatan: "Koordinator Laboratorium" },
+  //   { nama: "Dr. Ir. Eko Prasetyo, M.T.", jabatan: "Koordinator Penelitian" },
+  //   { nama: "Ir. Fauzi Rahman, M.T.", jabatan: "Koordinator Pengabdian" },
+  // ];
 
   // Data dummy untuk sertifikasi
   const sertifikasiList = [
@@ -101,6 +107,27 @@ export default function ProfileMain() {
       deskripsi: "Akreditasi internasional untuk program engineering",
     },
   ];
+
+  // Fetch data pejabat struktural
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        setTeamLoading(true);
+        const response = await apiClient.get("/team");
+        setTeam(response.data.data);
+        setTeamError(null);
+      } catch (err) {
+        console.error("Failed to fetch team data:", err);
+        setTeamError("Gagal memuat data pejabat struktural.");
+      } finally {
+        setTeamLoading(false);
+      }
+    };
+
+    if (activeTab === "struktur") {
+      fetchTeam();
+    }
+  }, [activeTab]);
 
   // Fetch research data
   useEffect(() => {
@@ -184,6 +211,14 @@ export default function ProfileMain() {
     return `${authors.slice(0, -1).join(", ")} dan ${
       authors[authors.length - 1]
     }`;
+  };
+
+  const getImageUrl = (imagePath: string | null) => {
+    if (!imagePath) {
+      // Return path ke gambar placeholder jika tidak ada foto
+      return "/images/staff/placeholder-profile.jpg"; 
+    }
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000"}/storage/${imagePath}`;
   };
 
   return (
@@ -275,28 +310,33 @@ export default function ProfileMain() {
               <h3 className="text-xl font-semibold mb-4 text-gray-700">
                 Pejabat Struktural
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {strukturOrganisasi.map((pejabat, index) => (
-                  <div
-                    key={index}
-                    className="bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <div className="aspect-w-1 aspect-h-1 bg-gray-200">
-                      <div className="w-full h-48 bg-gray-300 flex items-center justify-center">
-                        <span className="text-gray-500">
-                          Foto {pejabat.nama}
-                        </span>
+              {teamLoading && <p>Memuat data...</p>}
+              {teamError && <p className="text-red-500">{teamError}</p>}
+              
+              {!teamLoading && !teamError && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {team.map((pejabat) => (
+                    <div
+                      key={pejabat.id}
+                      className="bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <div className="aspect-w-1 aspect-h-1 bg-gray-200">
+                        <img 
+                          src={getImageUrl(pejabat.photo)} 
+                          alt={`Foto ${pejabat.name}`} 
+                          className="w-full h-48 object-cover" 
+                        />
+                      </div>
+                      <div className="p-4">
+                        <h4 className="font-semibold text-lg text-gray-800">
+                          {pejabat.name}
+                        </h4>
+                        <p className="text-sipil-base">{pejabat.position.name}</p>
                       </div>
                     </div>
-                    <div className="p-4">
-                      <h4 className="font-semibold text-lg text-gray-800">
-                        {pejabat.nama}
-                      </h4>
-                      <p className="text-sipil-base">{pejabat.jabatan}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
