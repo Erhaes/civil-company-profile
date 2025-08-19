@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import apiClient from "@/services/apiClient";
-import { TeamMember } from "@/types";
+import { TeamMember, Standard } from "@/types";
 
 // Type definitions for Research
 interface ResearchItem {
@@ -65,6 +65,11 @@ export default function ProfileMain() {
   const [teamLoading, setTeamLoading] = useState<boolean>(true);
   const [teamError, setTeamError] = useState<string | null>(null);
 
+  // State untuk data standar laboratorium dari API
+  const [standards, setStandards] = useState<Standard[]>([]);
+  const [standardsLoading, setStandardsLoading] = useState<boolean>(false);
+  const [standardsError, setStandardsError] = useState<string | null>(null);
+
   // Research states
   const [currentPage, setCurrentPage] = useState<number>(1);
   // const [itemsPerPage, setItemsPerPage] = useState<number>(8);
@@ -86,27 +91,21 @@ export default function ProfileMain() {
   //   { nama: "Ir. Fauzi Rahman, M.T.", jabatan: "Koordinator Pengabdian" },
   // ];
 
-  // Data dummy untuk sertifikasi
-  const sertifikasiList = [
-    {
-      id: 1,
-      nama: "Akreditasi BAN-PT",
-      tahun: "2023-2028",
-      deskripsi: "Akreditasi A untuk Program Studi Teknik Sipil",
-    },
-    {
-      id: 2,
-      nama: "ISO 9001:2015",
-      tahun: "2022-2025",
-      deskripsi: "Sertifikasi sistem manajemen mutu",
-    },
-    {
-      id: 3,
-      nama: "ABET Accreditation",
-      tahun: "2024-2030",
-      deskripsi: "Akreditasi internasional untuk program engineering",
-    },
-  ];
+  // Helper function untuk mendapatkan URL gambar standar
+  const getStandardImageUrl = (imagePath: string | null) => {
+    if (!imagePath) {
+      return "/images/accreditations/iso-certification.jpg"; // Default fallback image
+    }
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000"}/storage/${imagePath}`;
+  };
+
+  // Helper function untuk mendapatkan URL file standar
+  const getStandardFileUrl = (filePath: string | null) => {
+    if (!filePath) {
+      return "#"; // Return # if no file available
+    }
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000"}/storage/${filePath}`;
+  };
 
   // Fetch data pejabat struktural
   useEffect(() => {
@@ -126,6 +125,27 @@ export default function ProfileMain() {
 
     if (activeTab === "struktur") {
       fetchTeam();
+    }
+  }, [activeTab]);
+
+  // Fetch data standar laboratorium
+  useEffect(() => {
+    const fetchStandards = async () => {
+      try {
+        setStandardsLoading(true);
+        const response = await apiClient.get("/standards");
+        setStandards(response.data.data || response.data);
+        setStandardsError(null);
+      } catch (err) {
+        console.error("Failed to fetch standards data:", err);
+        setStandardsError("Gagal memuat data standar laboratorium.");
+      } finally {
+        setStandardsLoading(false);
+      }
+    };
+
+    if (activeTab === "sertifikasi") {
+      fetchStandards();
     }
   }, [activeTab]);
 
@@ -536,34 +556,76 @@ export default function ProfileMain() {
           {/* Sertifikasi & Akreditasi */}
           {activeTab === "sertifikasi" && (
             <div>
-              {/* <h2 className="text-3xl font-bold mb-6 text-gray-800">
-                Sertifikasi & Akreditasi
-              </h2> */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {sertifikasiList.map((sertifikasi) => (
-                  <div
-                    key={sertifikasi.id}
-                    className="flex bg-gray-50 rounded-lg overflow-hidden shadow-sm p-4"
-                  >
-                    <div className="w-16 h-16 bg-white rounded-md flex-shrink-0 flex items-center justify-center border">
-                      <span className="text-xs text-gray-500 text-center">
-                        Logo
-                      </span>
-                    </div>
-                    <div className="ml-4">
-                      <h3 className="font-semibold text-lg text-gray-800">
-                        {sertifikasi.nama}
-                      </h3>
-                      <p className="text-sipil-base text-sm">
-                        {sertifikasi.tahun}
-                      </p>
-                      <p className="text-gray-600 mt-2 text-sm">
-                        {sertifikasi.deskripsi}
-                      </p>
-                    </div>
+              {standardsLoading ? (
+                <div className="flex justify-center items-center h-64">
+                  <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sipil-base mx-auto mb-4"></div>
+                    <p>Memuat data standar laboratorium...</p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ) : standardsError ? (
+                <div className="text-center text-red-600">
+                  <p>{standardsError}</p>
+                  <button
+                    onClick={() => window.location.reload()}
+                    className="mt-4 px-4 py-2 bg-sipil-base text-white rounded-md hover:bg-sipil-secondary"
+                  >
+                    Coba Lagi
+                  </button>
+                </div>
+              ) : standards.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {standards.map((standard) => (
+                    <div
+                      key={standard.id}
+                      className="flex bg-gray-50 rounded-lg overflow-hidden shadow-sm p-4"
+                    >
+                      <div className="w-16 h-16 bg-white rounded-md flex-shrink-0 flex items-center justify-center border overflow-hidden">
+                        <img
+                          src={getStandardImageUrl(standard.foto)}
+                          alt={standard.nama}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="ml-4 flex-1">
+                        <h3 className="font-semibold text-lg text-gray-800">
+                          {standard.nama}
+                        </h3>
+                        <p className="text-gray-600 mt-2 text-sm">
+                          {standard.deskripsi}
+                        </p>
+                        {standard.file && (
+                          <Link
+                            href={getStandardFileUrl(standard.file)}
+                            className="inline-flex items-center mt-3 text-sipil-base text-sm font-medium hover:text-sipil-secondary"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                              />
+                            </svg>
+                            Unduh Dokumen
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center text-gray-500 py-12">
+                  <p>Tidak ada data standar laboratorium yang tersedia</p>
+                </div>
+              )}
             </div>
           )}
         </div>

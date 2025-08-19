@@ -152,6 +152,13 @@ export default function NewsMain() {
     });
   };
 
+  // Helper function untuk menghapus HTML tags dari content
+  const stripHtmlTags = (html: string): string => {
+    const tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  };
+
   // Helper function untuk truncate content - dikomentari karena tidak digunakan
   // const truncateContent = (content: string, maxLength: number = 150): string => {
   //   if (content.length <= maxLength) return content;
@@ -508,7 +515,7 @@ export default function NewsMain() {
                     </h3>
                   </a>
                   <p className="text-gray-600 mb-4 flex-grow text-sm line-clamp-2">
-                    {item.content}
+                    {stripHtmlTags(item.content)}
                   </p>
                   <a
                     href={`/berita/${item.slug}`}

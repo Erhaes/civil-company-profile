@@ -196,3 +196,24 @@ export interface Equipment {
   updated_at: string;
   deleted_at: string | null;
 }
+
+export interface Standard {
+  id: number;
+  nama: string;
+  deskripsi: string;
+  foto: string | null;
+  file: string | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface Review {
+  id: number;
+  rating: number;
+  content: string;
+  testing_id: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
