@@ -1,4 +1,51 @@
+"use client";
+import { useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import apiClient from "@/services/apiClient";
+import { Carousel } from "@/types";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 export default function HomepageHero() {
+  const [carouselData, setCarouselData] = useState<Carousel[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const getImageUrl = (imagePath: string) => {
+    if (!imagePath) {
+      return "/images/backgrounds/gedung-lab.jpg"; // Default fallback image
+    }
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8000"}/storage/${imagePath}`;
+  };
+
+  // Fetch carousel data
+  useEffect(() => {
+    const fetchCarousel = async () => {
+      try {
+        setLoading(true);
+        const response = await apiClient.get("/carousel");
+        const data = response.data.data || response.data;
+        // Filter only active carousel items and sort by order
+        const activeCarousel = data
+          .filter((item: Carousel) => item.is_active)
+          .sort((a: Carousel, b: Carousel) => a.order - b.order);
+        setCarouselData(activeCarousel);
+        setError(null);
+      } catch (err) {
+        console.error("Failed to fetch carousel data:", err);
+        setError("Gagal memuat data carousel.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCarousel();
+  }, []);
+
   return (
     <section
       id="hero"
@@ -54,11 +101,62 @@ export default function HomepageHero() {
           </div>
         </div>
         <div className="hero-animate-2">
-          <img
-            src="/images/backgrounds/gedung-lab.jpg"
-            alt="Gedung D Laboratorium Fakultas Teknik Unsoed"
-            className="xl:max-w-xl rounded-lg"
-          />
+          {loading ? (
+            <div className="xl:max-w-xl rounded-lg bg-gray-200 animate-pulse h-64 flex items-center justify-center">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sipil-base mx-auto mb-4"></div>
+                <p>Memuat carousel...</p>
+              </div>
+            </div>
+          ) : error ? (
+            <div className="xl:max-w-xl rounded-lg bg-gray-200 h-64 flex items-center justify-center">
+              <div className="text-center text-red-600">
+                <p>{error}</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="mt-4 px-4 py-2 bg-sipil-base text-white rounded-md hover:bg-sipil-secondary"
+                >
+                  Coba Lagi
+                </button>
+              </div>
+            </div>
+          ) : carouselData.length > 0 ? (
+            <Swiper
+              spaceBetween={30}
+              centeredSlides={true}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+              }}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              modules={[Autoplay, Pagination, Navigation]}
+              className="xl:max-w-xl rounded-lg"
+            >
+              {carouselData.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <div className="relative">
+                    <img
+                      src={getImageUrl(item.image)}
+                      alt={item.title}
+                      className="w-full h-64 xl:h-80 object-cover rounded-lg"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                      <h3 className="text-white font-semibold text-lg">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div className="xl:max-w-xl rounded-lg bg-gray-200 h-64 flex items-center justify-center">
+              <p className="text-gray-500">Tidak ada data carousel</p>
+            </div>
+          )}
         </div>
       </div>
     </section>

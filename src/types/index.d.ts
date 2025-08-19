@@ -217,3 +217,21 @@ export interface Review {
   updated_at: string;
   deleted_at: string | null;
 }
+
+export interface Carousel {
+  id: number;
+  title: string;
+  image: string;
+  order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Laboratory {
+  id: number;
+  name: string;
+  images: string;
+  created_at: string;
+  updated_at: string;
+}
