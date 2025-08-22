@@ -138,11 +138,13 @@ export default function TestDetail() {
           <div className="flex flex-col md:flex-row gap-8">
             {/* Test Image Gallery */}
             <div className="md:w-1/2">
-              <div className="relative w-full h-72 overflow-hidden rounded-lg">
+              <div className="relative w-full h-72 md:h-96 lg:h-[480px] overflow-hidden rounded-lg">
+              {/* <div className="relative w-full h-72 overflow-hidden rounded-lg"> */}
                 <img
                   src={getImageUrl(test.images[imageIndex])}
                   alt={test.name}
-                  className="object-cover"
+                  className="w-full h-full object-cover"
+                  // className="object-cover"
                 />
 
                 {/* Status Badge */}
@@ -182,7 +184,8 @@ export default function TestDetail() {
                       <img
                         src={getImageUrl(imagePath)}
                         alt={`${test.name} - gambar ${index + 1}`}
-                        className="object-cover"
+                        className="w-full h-full object-cover"
+                        // className="object-cover"
                       />
                     </div>
                   ))}
@@ -290,7 +293,7 @@ export default function TestDetail() {
                   </svg>
                   <div>
                     <p className="text-sm text-blue-300">Minimum Pengujian</p>
-                    <p className="font-medium">{test.minimum_unit} Unit</p>
+                    <p className="font-medium">{test.minimum_unit} {test.category.name}</p>
                   </div>
                 </div>
 

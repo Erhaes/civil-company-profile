@@ -122,7 +122,7 @@ export default function HomepageAbout() {
                   const images = parseImages(lab.images);
                   return images.map((image, index) => (
                     <SwiperSlide key={`${lab.id}-${index}`}>
-                      <div className="relative h-64">
+                      <div className="relative aspect-video">
                         <img
                           src={getImageUrl(image)}
                           alt={lab.name}
