@@ -22,7 +22,7 @@ export default function HomepageAbout() {
             Visi dan Misi Laboratorium Teknik Sipil Unsoed
           </h2>
           <p className="max-w-3xl mx-auto">
-            Program Studi Teknik Sipil Universitas Jenderal Soedirman didirikan
+            Laboratorium bidang Teknik Sipil Universitas Jenderal Soedirman didirikan
             untuk menjawab kebutuhan akan tenaga profesional di bidang teknik
             sipil yang kompeten dan berintegritas.
           </p>
